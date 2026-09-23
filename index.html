@@ -3,1100 +3,408 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>LG Subscribe Catalogue</title>
+<title>LG STANBYME — Your Screen, Your Way</title>
 <link rel="icon" href="logo.png" type="image/png">
 <link rel="apple-touch-icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --red: #a50034;
-  --red-dark: #720024;
-  --ink: #151316;
-  --muted: #69656b;
-  --paper: #fffaf7;
-  --surface: #ffffff;
-  --blush: #f8e8ed;
-  --stone: #ece7e3;
-  --clay: #c36b43;
-  --sage: #47675c;
-  --line: rgba(21, 19, 22, .14);
-  --shadow: 0 22px 60px rgba(51, 30, 38, .15);
-  --radius: 14px;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: Montserrat, Inter, system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-button, input, select { font: inherit; }
-button { cursor: pointer; }
-a { color: inherit; }
-.container { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  border-bottom: 1px solid var(--line);
-  background: rgba(255, 250, 247, .88);
-  backdrop-filter: blur(18px);
-}
-.nav-row {
-  min-height: 74px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
-}
-.brand img {
-  width: 43px;
-  height: 43px;
-  object-fit: contain;
-}
-.brand-mark {
-  font-family: Montserrat, sans-serif;
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1;
-}
-.brand-mark span { color: var(--red); }
-.brand-sub {
-  display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-}
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.button {
-  min-height: 44px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  color: var(--ink);
-  padding: 0 15px;
-  font-weight: 700;
-  transition: transform .16s ease, border-color .16s ease, background .16s ease;
-}
-.button:hover { transform: translateY(-1px); border-color: rgba(21, 19, 22, .32); }
-.button.primary {
-  background: var(--red);
-  border-color: var(--red);
-  color: #fff;
-}
-.language-toggle {
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4px;
-  padding: 4px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, .7);
-}
-.language-toggle button {
-  width: 44px;
-  height: 36px;
-  border: 0;
-  border-radius: 6px;
-  background: transparent;
-  color: var(--muted);
-  font-weight: 800;
-}
-.language-toggle button.active {
-  background: var(--ink);
-  color: #fff;
-}
-.hero {
-  position: relative;
-  overflow: hidden;
-  padding: 72px 0 46px;
-  border-bottom: 1px solid var(--line);
-}
-.hero:before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(120deg, rgba(165, 0, 52, .10), transparent 34%),
-    radial-gradient(circle at 88% 16%, rgba(195, 107, 67, .22), transparent 34%),
-    linear-gradient(180deg, #fff, var(--paper));
-  pointer-events: none;
-}
-.hero-grid {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, 430px);
-  gap: 54px;
-  align-items: center;
-}
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--red);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.eyebrow:before {
-  content: "";
-  width: 34px;
-  height: 2px;
-  background: var(--red);
-}
-h1, h2, h3, .display {
-  font-family: Montserrat, sans-serif;
-  letter-spacing: 0;
-}
-.hero h1 {
-  margin: 18px 0 18px;
-  max-width: 780px;
-  font-size: clamp(40px, 5.8vw, 74px);
-  line-height: 1.02;
-  font-weight: 800;
-}
-.hero-copy {
-  max-width: 680px;
-  color: var(--muted);
-  font-size: 17px;
-  line-height: 1.7;
-}
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 28px;
-}
-.hero-panel {
-  position: relative;
-  min-height: 530px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: linear-gradient(180deg, #fff, #f7f0ed);
-  box-shadow: var(--shadow);
-  padding: 24px;
-  overflow: hidden;
-}
-.hero-panel:before {
-  content: "";
-  position: absolute;
-  inset: 18px;
-  border: 1px solid rgba(165, 0, 52, .15);
-  border-radius: var(--radius);
-}
-.product-totem {
-  position: relative;
-  height: 330px;
-  margin-top: 20px;
-}
-.totem-item {
-  position: absolute;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(21, 19, 22, .14);
-  background: #fff;
-  color: var(--ink);
-  box-shadow: 0 16px 38px rgba(21, 19, 22, .08);
-  font-weight: 800;
-}
-.totem-tv { width: 250px; height: 142px; left: 44px; top: 0; border-radius: 6px; }
-.totem-ref { width: 118px; height: 214px; right: 38px; top: 82px; border-radius: 8px 8px 3px 3px; }
-.totem-wm { width: 142px; height: 142px; left: 28px; bottom: 4px; border-radius: 50%; }
-.totem-wm:after {
-  content: "";
-  width: 62px;
-  height: 62px;
-  border: 10px solid var(--blush);
-  border-radius: 50%;
-}
-.totem-label {
-  position: absolute;
-  left: 24px;
-  right: 24px;
-  bottom: 24px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.stat {
-  position: relative;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, .86);
-  padding: 16px;
-}
-.stat strong {
-  display: block;
-  font-family: Montserrat, sans-serif;
-  font-size: 29px;
-  line-height: 1;
-}
-.stat span {
-  display: block;
-  margin-top: 7px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-}
-.toolbar {
-  position: sticky;
-  top: 75px;
-  z-index: 15;
-  border-bottom: 1px solid var(--line);
-  background: rgba(255, 250, 247, .92);
-  backdrop-filter: blur(16px);
-  padding: 14px 0;
-}
-.filters {
-  display: grid;
-  grid-template-columns: minmax(220px, 1.25fr) repeat(4, minmax(132px, .75fr)) auto;
-  gap: 10px;
-  align-items: center;
-}
-.field {
-  width: 100%;
-  min-height: 46px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: #fff;
-  color: var(--ink);
-  padding: 0 12px;
-  font-weight: 600;
-}
-.field:focus, .button:focus-visible, .tab:focus-visible, .card-link:focus-visible {
-  outline: 3px solid rgba(165, 0, 52, .22);
-  outline-offset: 2px;
-}
-section { padding: 76px 0; }
-.section-head {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 26px;
-  margin-bottom: 24px;
-}
-.section-head h2 {
-  margin: 0 0 8px;
-  font-size: clamp(30px, 3.5vw, 44px);
-  line-height: 1.08;
-}
-.section-head p {
-  margin: 0;
-  max-width: 640px;
-  color: var(--muted);
-  line-height: 1.6;
-}
-.status {
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 700;
-  text-align: right;
-}
-.category-tabs {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 0 0 14px;
-  margin-bottom: 18px;
-  scrollbar-width: thin;
-}
-.tab {
-  flex: 0 0 auto;
-  min-height: 42px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: #fff;
-  color: var(--ink);
-  padding: 0 14px;
-  font-weight: 800;
-}
-.tab.active {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #fff;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-.card {
-  display: flex;
-  min-height: 548px;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: #fff;
-  box-shadow: 0 12px 32px rgba(21, 19, 22, .06);
-  transition: transform .18s ease, box-shadow .18s ease;
-}
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 48px rgba(21, 19, 22, .12);
-}
-.media {
-  position: relative;
-  height: 210px;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  background:
-    linear-gradient(135deg, rgba(165, 0, 52, .09), transparent 42%),
-    linear-gradient(180deg, #fff, #f0ebe7);
-  border-bottom: 1px solid var(--line);
-}
-.media img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 20px;
-}
-.placeholder {
-  width: 70%;
-  min-height: 116px;
-  display: grid;
-  place-items: center;
-  border: 2px solid rgba(21, 19, 22, .16);
-  border-radius: var(--radius);
-  color: rgba(21, 19, 22, .58);
-  padding: 18px;
-  text-align: center;
-  font-weight: 800;
-  line-height: 1.35;
-}
-.badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  max-width: calc(100% - 24px);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .88);
-  padding: 7px 10px;
-  font-size: 11px;
-  font-weight: 800;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.card-body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 14px;
-  padding: 18px;
-}
-.kicker {
-  color: var(--red);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-.model {
-  font-family: Montserrat, sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.05;
-  overflow-wrap: anywhere;
-}
-.meta {
-  min-height: 42px;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
-  overflow-wrap: anywhere;
-}
-.price-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.price {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: #fff;
-  padding: 12px;
-}
-.price span, .plan span {
-  display: block;
-  margin-bottom: 5px;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 800;
-}
-.price strong {
-  font-size: 17px;
-  line-height: 1.15;
-}
-.plans {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-.plan {
-  border-radius: var(--radius);
-  background: var(--blush);
-  padding: 10px 8px;
-  text-align: center;
-}
-.plan strong {
-  display: block;
-  font-size: 13px;
-  line-height: 1.2;
-}
-.card-links {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: auto;
-}
-.card-link {
-  min-height: 42px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  color: var(--ink);
-  font-size: 13px;
-  font-weight: 800;
-  text-align: center;
-  text-decoration: none;
-}
-.card-link.primary {
-  background: var(--red);
-  border-color: var(--red);
-  color: #fff;
-}
-.empty {
-  border: 1px dashed var(--line);
-  border-radius: var(--radius);
-  background: #fff;
-  color: var(--muted);
-  padding: 44px;
-  text-align: center;
-  font-weight: 700;
-}
-.story {
-  background: var(--ink);
-  color: #fff;
-  overflow: hidden;
-}
-.story-grid {
-  display: grid;
-  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-  gap: 38px;
-  align-items: start;
-}
-.story-grid > * {
-  min-width: 0;
-}
-.story h2 {
-  margin: 0 0 16px;
-  max-width: 720px;
-  font-size: clamp(30px, 3.35vw, 44px);
-  line-height: 1.12;
-}
-.story p {
-  margin: 0;
-  max-width: 760px;
-  color: rgba(255, 255, 255, .74);
-  font-size: 16px;
-  line-height: 1.72;
-}
-.method-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  min-width: 0;
-}
-.method {
-  min-width: 0;
-  min-height: 190px;
-  border: 1px solid rgba(255, 255, 255, .16);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, .06);
-  padding: 20px;
-}
-.method strong {
-  display: block;
-  margin-bottom: 10px;
-  font-family: Montserrat, sans-serif;
-  font-size: 26px;
-}
-.method span {
-  color: rgba(255, 255, 255, .74);
-  line-height: 1.55;
-}
-:lang(vi) .hero h1 {
-  max-width: 860px;
-  font-size: clamp(36px, 5.15vw, 66px);
-  line-height: 1.08;
-}
-:lang(vi) .hero-copy,
-:lang(vi) .story p {
-  line-height: 1.78;
-}
-:lang(vi) .story h2 {
-  max-width: 740px;
-  font-size: clamp(28px, 3vw, 40px);
-  line-height: 1.16;
-}
-.footer {
-  border-top: 1px solid var(--line);
-  padding: 34px 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.5;
-}
-.footer-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *:before, *:after {
-    scroll-behavior: auto !important;
-    transition: none !important;
+  :root{
+    --lg-white:#FFFFFF;
+    --lg-red:#A50034;
+    --lg-red-dark:#7C0027;
+    --lg-ink:#17181A;
+    --lg-mist:#F4F4F6;
+    --lg-line:#E5E5E8;
+    --lg-sub:#6B6B70;
+    --lg-red-tint:#FBE9EE;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    box-sizing:border-box;
   }
-}
-@media (max-width: 1040px) {
-  .hero-grid, .story-grid { grid-template-columns: 1fr; }
-  .hero-panel { min-height: 430px; }
-  .product-totem { height: 280px; }
-  .filters { grid-template-columns: 1fr 1fr 1fr; }
-  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .method-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 720px) {
-  .container { width: min(100% - 32px, 1180px); }
-  .nav-row { min-height: 66px; }
-  .brand-sub { display: none; }
-  .nav-actions .button { display: none; }
-  .language-toggle button { width: 40px; }
-  .hero { padding: 48px 0 34px; }
-  .hero h1 { font-size: clamp(36px, 11.5vw, 52px); line-height: 1.06; }
-  :lang(vi) .hero h1 { font-size: clamp(32px, 10.2vw, 46px); line-height: 1.12; }
-  .hero-copy { font-size: 16px; }
-  .hero-actions { display: grid; grid-template-columns: 1fr; }
-  .button { width: 100%; }
-  .hero-panel { min-height: auto; padding: 18px; }
-  .hero-panel:before { inset: 12px; }
-  .product-totem { height: 238px; margin-top: 8px; }
-  .totem-tv { width: 196px; height: 112px; left: 10px; }
-  .totem-ref { width: 92px; height: 168px; right: 8px; top: 58px; }
-  .totem-wm { width: 112px; height: 112px; left: 8px; bottom: 6px; }
-  .totem-label { position: relative; left: auto; right: auto; bottom: auto; grid-template-columns: 1fr; margin-top: 12px; }
-  .toolbar { position: static; padding: 12px 0; }
-  .filters { grid-template-columns: 1fr; }
-  .field, .button { min-height: 48px; }
-  section { padding: 54px 0; }
-  .section-head { display: block; }
-  .status { margin-top: 14px; text-align: left; }
-  .grid { grid-template-columns: 1fr; gap: 14px; }
-  .card { min-height: auto; }
-  .media { height: 188px; }
-  .price-row, .card-links { grid-template-columns: 1fr; }
-  .plans { grid-template-columns: 1fr 1fr 1fr; }
-  .price strong { font-size: 16px; }
-}
-@media (max-width: 390px) {
-  .container { width: min(100% - 24px, 1180px); }
-  .brand-mark { font-size: 17px; }
-  .language-toggle button { width: 36px; }
-  .plans { grid-template-columns: 1fr; }
-  .hero h1 { font-size: 34px; }
-  :lang(vi) .hero h1 { font-size: 30px; }
-}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+  html,body{height:100%;}
+  body{
+    margin:0; background:var(--lg-white); color:var(--lg-ink);
+    font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.headline{font-family:'Poppins',sans-serif;}
+  img,svg{max-width:100%;}
+  .wide{width:100%; overflow-x:auto;}
+  .container{max-width:1180px; margin:0 auto; padding:0 32px;}
+  section{padding:96px 0;}
+  @media(max-width:640px){ section{padding:64px 0;} .container{padding:0 20px;} }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; top:env(safe-area-inset-top,0px); z-index:50;
+    background:rgba(255,255,255,.88); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--lg-line);
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between; height:76px;}
+  .nav-logo{font-family:'Poppins'; font-weight:700; font-size:22px; letter-spacing:.5px;}
+  .nav-logo span{color:var(--lg-red);}
+  .nav-cta{
+    background:var(--lg-red); color:#fff; border:none; padding:14px 26px;
+    border-radius:999px; font-family:'Inter'; font-weight:600; font-size:15px;
+    cursor:pointer; transition:transform .15s ease, background .2s ease;
+  }
+  .nav-cta:hover{background:var(--lg-red-dark); transform:translateY(-1px);}
+
+  /* HERO */
+  .hero{
+    padding:88px 0 64px; text-align:center; position:relative;
+    background:radial-gradient(ellipse at 50% 0%, #fff 0%, var(--lg-mist) 120%);
+  }
+  .eyebrow-pill{
+    display:inline-block; background:var(--lg-red-tint); color:var(--lg-red);
+    font-weight:600; font-size:14px; padding:8px 18px; border-radius:999px; margin-bottom:28px;
+    opacity:0; animation:rise .6s ease forwards;
+  }
+  .hero h1{
+    font-size:clamp(38px,6vw,66px); line-height:1.06; font-weight:700; margin:0 0 22px;
+    opacity:0; animation:rise .7s ease .1s forwards;
+  }
+  .hero h1 .accent{color:var(--lg-red);}
+  .hero p.lede{
+    font-size:clamp(17px,2vw,21px); color:var(--lg-sub); max-width:620px; margin:0 auto 40px;
+    line-height:1.6; opacity:0; animation:rise .7s ease .2s forwards;
+  }
+  .hero-ctas{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:64px;
+    opacity:0; animation:rise .7s ease .3s forwards;}
+  .btn-primary, .btn-secondary{
+    font-family:'Inter'; font-weight:600; font-size:17px; padding:18px 34px; border-radius:999px;
+    cursor:pointer; transition:transform .15s ease, box-shadow .2s ease, background .2s ease; border:none;
+  }
+  .btn-primary{background:var(--lg-red); color:#fff; box-shadow:0 10px 24px -8px rgba(165,0,52,.5);}
+  .btn-primary:hover{background:var(--lg-red-dark); transform:translateY(-2px);}
+  .btn-secondary{background:#fff; color:var(--lg-ink); border:1.5px solid var(--lg-line);}
+  .btn-secondary:hover{border-color:var(--lg-ink); transform:translateY(-2px);}
+
+  /* Product visual (CSS-drawn STANBYME) */
+  .device-wrap{display:flex; justify-content:center; opacity:0; animation:rise .8s ease .35s forwards;}
+  .subscribe-card{
+    width:min(90vw,420px); background:#fff; border:1px solid var(--lg-line); border-radius:22px;
+    padding:32px 30px; box-shadow:0 30px 60px -30px rgba(0,0,0,.25); text-align:left;
+  }
+  .sc-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .sc-chip{background:var(--lg-red-tint); color:var(--lg-red); font-size:13px; font-weight:600; padding:6px 14px; border-radius:999px;}
+  .sc-cycle{color:var(--lg-red); font-size:20px;}
+  .sc-amount{font-family:'Poppins'; font-weight:700; font-size:36px; margin-bottom:22px;}
+  .sc-amount span{font-family:'Inter'; font-weight:500; font-size:16px; color:var(--lg-sub);}
+  .sc-line{height:1px; background:var(--lg-line); margin-bottom:20px;}
+  .sc-item{display:flex; justify-content:space-between; gap:16px; margin-bottom:14px; font-size:14.5px;}
+  .sc-item span{color:var(--lg-sub);}
+  .sc-item strong{font-weight:600; text-align:right;}
+  @keyframes rise{from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);}}
+  @media (prefers-reduced-motion: reduce){
+    .eyebrow-pill,.hero h1,.hero p.lede,.hero-ctas,.device-wrap{animation:none; opacity:1;}
+  }
+
+  /* HIGHLIGHTS */
+  .section-head{text-align:center; max-width:640px; margin:0 auto 56px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px); font-weight:600; margin:0 0 14px;}
+  .section-head p{color:var(--lg-sub); font-size:17px; line-height:1.6; margin:0;}
+  .grid-highlights{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:22px;
+  }
+  .hi-card{
+    background:#fff; border:1px solid var(--lg-line); border-radius:20px; padding:32px 24px;
+    text-align:center; transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .hi-card:hover{transform:translateY(-4px); box-shadow:0 20px 40px -24px rgba(0,0,0,.25);}
+  .hi-icon{
+    width:52px; height:52px; margin:0 auto 18px; border-radius:14px; background:var(--lg-red-tint);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hi-card h3{font-size:17px; font-weight:600; margin:0 0 8px;}
+  .hi-card p{font-size:14.5px; color:var(--lg-sub); margin:0; line-height:1.5;}
+
+  /* SUBSCRIBE */
+  .subscribe{background:var(--lg-ink); color:#fff;}
+  .subscribe .section-head p{color:#c9c9cc;}
+  .subscribe .section-head h2{color:#fff;}
+  .sub-layout{display:grid; grid-template-columns:1.1fr 1fr; gap:48px; align-items:center;}
+  @media(max-width:860px){.sub-layout{grid-template-columns:1fr;}}
+  .price-card{
+    background:linear-gradient(155deg,#fff,#FBE9EE); color:var(--lg-ink); border-radius:24px;
+    padding:40px 36px; text-align:center;
+  }
+  .price-card .tag{font-size:14px; font-weight:600; color:var(--lg-red); margin-bottom:10px;}
+  .price-card .amount{font-size:44px; font-weight:700; font-family:'Poppins'; margin:0 0 4px;}
+  .price-card .period{color:var(--lg-sub); font-size:15px; margin-bottom:26px;}
+  .price-card .btn-primary{width:100%;}
+  .sub-features{list-style:none; padding:0; margin:0 0 32px; display:grid; gap:18px;}
+  .sub-features li{display:flex; gap:14px; font-size:16px; line-height:1.5; color:#e4e4e6;}
+  .sub-features .check{
+    flex:none; width:24px; height:24px; border-radius:50%; background:var(--lg-red);
+    display:flex; align-items:center; justify-content:center; margin-top:2px;
+  }
+
+  /* PROMOTION */
+  .promo{
+    background:var(--lg-red); color:#fff; border-radius:28px; padding:56px 44px;
+    display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;
+    box-shadow:0 30px 60px -30px rgba(165,0,52,.6);
+  }
+  .promo-left{max-width:560px;}
+  .promo .badge{
+    display:inline-block; background:rgba(255,255,255,.18); padding:7px 16px; border-radius:999px;
+    font-size:13px; font-weight:600; margin-bottom:18px; letter-spacing:.3px;
+  }
+  .promo h2{font-size:clamp(26px,3vw,36px); margin:0 0 12px; font-weight:600;}
+  .promo .promo-value{font-size:clamp(30px,3.6vw,44px); font-weight:700; font-family:'Poppins'; margin:0 0 14px;}
+  .promo p.note{margin:0; opacity:.9; font-size:15px;}
+  .promo .btn-primary{background:#fff; color:var(--lg-red); box-shadow:none;}
+  .promo .btn-primary:hover{background:#f2f2f2;}
+
+  /* STEPS */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  @media(max-width:760px){.steps{grid-template-columns:1fr;}}
+  .step{text-align:center; padding:0 12px;}
+  .step .num{
+    width:56px; height:56px; border-radius:50%; border:2px solid var(--lg-red); color:var(--lg-red);
+    display:flex; align-items:center; justify-content:center; font-family:'Poppins'; font-weight:600;
+    font-size:19px; margin:0 auto 20px;
+  }
+  .step h3{font-size:18px; font-weight:600; margin:0 0 8px;}
+  .step p{color:var(--lg-sub); font-size:15px; margin:0; line-height:1.5;}
+  .step-divider{display:flex; align-items:center; justify-content:center; color:var(--lg-line); font-size:22px;}
+
+  /* CATEGORIES */
+  .category-grid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px;}
+  .category-card{
+    display:flex; min-height:220px; flex-direction:column; justify-content:space-between;
+    background:#fff; border:1px solid var(--lg-line); border-radius:18px; padding:24px;
+    color:var(--lg-ink); text-decoration:none; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .category-card:hover{transform:translateY(-4px); box-shadow:0 20px 42px -28px rgba(0,0,0,.35); border-color:rgba(165,0,52,.35);}
+  .cat-icon{width:52px; height:52px; border-radius:16px; background:var(--lg-red-tint); display:flex; align-items:center; justify-content:center; font-size:25px;}
+  .category-card h3{font-size:22px; margin:22px 0 8px;}
+  .category-card p{color:var(--lg-sub); line-height:1.5; margin:0; font-size:14.5px;}
+  .cat-link{margin-top:22px; color:var(--lg-red); font-weight:700; font-size:14px;}
+  @media(max-width:920px){.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  @media(max-width:560px){.category-grid{grid-template-columns:1fr;}.category-card{min-height:190px;}}
+
+  /* FINAL CTA */
+  .final-cta{
+    text-align:center; background:var(--lg-mist); border-radius:28px; padding:72px 32px;
+  }
+  .final-cta h2{font-size:clamp(28px,3.6vw,42px); margin:0 0 32px; font-weight:600;}
+  .final-cta .hero-ctas{opacity:1; animation:none; margin-bottom:0;}
+
+  /* FOOTER */
+  footer{background:var(--lg-ink); color:#c9c9cc; padding:56px 0 32px; font-size:14.5px;}
+  .foot-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:32px; margin-bottom:36px;}
+  .foot-logo{font-family:'Poppins'; font-weight:700; font-size:20px; color:#fff;}
+  .foot-logo span{color:#ff5c85;}
+  .foot-col h4{color:#fff; font-size:14px; font-weight:600; margin:0 0 14px;}
+  .foot-col p, .foot-col a{color:#a9a9ad; text-decoration:none; display:block; margin-bottom:8px; font-size:14px;}
+  .foot-col a:hover{color:#fff;}
+  .foot-bottom{border-top:1px solid #2c2c2e; padding-top:22px; text-align:center; color:#7c7c80; font-size:13px;}
 </style>
 </head>
 <body>
-<nav class="nav">
+
+<nav>
   <div class="container nav-row">
-    <div class="brand">
-      <img src="logo.png" alt="LG">
-      <div>
-        <div class="brand-mark">LG <span>Subscribe</span></div>
-        <span class="brand-sub" data-i18n="brandSub">Product catalogue</span>
-      </div>
-    </div>
-    <div class="nav-actions">
-      <button class="button" data-scroll="catalog" data-i18n="browseNav">Browse products</button>
-      <button class="button primary" data-scroll="story" data-i18n="plansNav">Compare plans</button>
-      <div class="language-toggle" aria-label="Language">
-        <button type="button" data-lang="en" class="active">EN</button>
-        <button type="button" data-lang="vi">VI</button>
-      </div>
-    </div>
+    <div class="nav-logo">LG <span>Subscribe</span></div>
+      <button class="nav-cta" onclick="document.getElementById('subscribe').scrollIntoView()">Explore LG Subscribe</button>
   </div>
 </nav>
 
+<!-- 1. HERO -->
 <header class="hero">
-  <div class="container hero-grid">
-    <div>
-      <div class="eyebrow" data-i18n="eyebrow">OutRight or Rental</div>
-      <h1 data-i18n="headline">Choose the LG product now. Choose how to pay next.</h1>
-      <p class="hero-copy" data-i18n="heroCopy">A simple catalogue for LG Subscribe: filter by category, compare OutRight pricing with 12, 24, and 36 month plans, then open LG.com to source official product images.</p>
-      <div class="hero-actions">
-        <button class="button primary" data-scroll="catalog" data-i18n="browseCta">Browse catalogue</button>
-        <button class="button" data-scroll="story" data-i18n="methodCta">See payment methods</button>
+  <div class="container">
+    <span class="eyebrow-pill">LG Subscribe</span>
+    <h1>Own It Monthly, <span class="accent">Live It Fully</span></h1>
+    <p class="lede">Get the LG products you want today, pay a simple monthly amount, and let LG take care of the rest — no large upfront cost, no long-term worry.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById('subscribe').scrollIntoView()">Explore LG Subscribe</button>
+      <button class="btn-secondary" onclick="document.getElementById('footer').scrollIntoView()">Contact Sales</button>
+    </div>
+    <div class="device-wrap">
+      <div class="subscribe-card">
+        <div class="sc-row">
+          <span class="sc-chip">Monthly plan</span>
+          <span class="sc-cycle">↻</span>
+        </div>
+        <div class="sc-amount">From ₫90.000<span>/month</span></div>
+        <div class="sc-line"></div>
+        <div class="sc-item"><span>Product</span><strong>Your choice of LG product</strong></div>
+        <div class="sc-item"><span>Period</span><strong>12 / 24 / 36 months</strong></div>
+        <div class="sc-item"><span>Includes</span><strong>Product care and support</strong></div>
       </div>
     </div>
-    <aside class="hero-panel" aria-label="Catalogue summary">
-      <div class="eyebrow" data-i18n="heroPanelLabel">Live workbook</div>
-      <div class="product-totem" aria-hidden="true">
-        <div class="totem-item totem-tv">OLED</div>
-        <div class="totem-item totem-ref">REF</div>
-        <div class="totem-item totem-wm"></div>
-      </div>
-      <div class="totem-label">
-        <div class="stat">
-          <strong id="heroCount">--</strong>
-          <span data-i18n="productsLoaded">products loaded</span>
-        </div>
-        <div class="stat">
-          <strong id="heroFrom">--</strong>
-          <span data-i18n="lowestPayment">lowest 36 month payment</span>
-        </div>
-      </div>
-    </aside>
   </div>
 </header>
 
-<div class="toolbar">
-  <div class="container filters">
-    <input id="search" class="field" autocomplete="off">
-    <select id="category" class="field"></select>
-    <select id="type" class="field"></select>
-    <select id="sort" class="field"></select>
-    <select id="plan" class="field"></select>
-    <button id="reset" class="button" type="button" data-i18n="reset">Reset</button>
-  </div>
-</div>
-
-<section id="catalog">
+<!-- 2. WHY LG SUBSCRIBE -->
+<section>
   <div class="container">
     <div class="section-head">
+      <h2>Why customers choose LG Subscribe</h2>
+      <p>A simpler way to own the LG products you love.</p>
+    </div>
+    <div class="grid-highlights">
+      <div class="hi-card">
+        <div class="hi-icon">💳</div>
+        <h3>No upfront cost</h3>
+        <p>Start using your LG product today with a low, predictable monthly payment.</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">🗓️</div>
+        <h3>Flexible periods</h3>
+        <p>Choose the subscription length that fits your budget and lifestyle.</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">🛠️</div>
+        <h3>Care included</h3>
+        <p>Product care and support keep your LG product running smoothly during the plan.</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">🛡️</div>
+        <h3>Backed by warranty</h3>
+        <p>Eligible products are backed by LG service coverage for peace of mind.</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">🔁</div>
+        <h3>Works across products</h3>
+        <p>Apply LG Subscribe to a wide range of eligible LG products, in-store or here at the kiosk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. LG SUBSCRIBE OFFER -->
+<section class="subscribe" id="subscribe">
+  <div class="container">
+    <div class="section-head">
+      <h2>How LG Subscribe works</h2>
+      <p>One monthly plan covers your product and the care that comes with it — available on eligible LG products, including the display you're viewing this on.</p>
+    </div>
+    <div class="sub-layout">
+      <ul class="sub-features">
+        <li><span class="check">✓</span> Simple monthly payment — no large upfront cost</li>
+        <li><span class="check">✓</span> Choose a subscription period that fits you: 12 / 24 / 36 months</li>
+        <li><span class="check">✓</span> Includes product care and support for peace of mind</li>
+        <li><span class="check">✓</span> Backed by eligible LG service coverage</li>
+        <li><span class="check">✓</span> Compare OutRight and Rental prices by category</li>
+        <li><span class="check">✓</span> Guided registration with our on-site LG team</li>
+      </ul>
+    </div>
+    <div style="max-width:360px;margin:40px auto 0;">
+      <div class="price-card">
+        <div class="tag">LG Subscribe plan</div>
+        <div class="amount">From ₫90.000</div>
+        <div class="period">per month · plans from 12–36 months</div>
+        <button class="btn-primary" onclick="document.getElementById('promo').scrollIntoView()">See current offer</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. PROMOTION -->
+<section id="promo">
+  <div class="container">
+    <div class="promo">
+      <div class="promo-left">
+        <span class="badge">Special Offer</span>
+        <h2>A limited-time deal on LG Subscribe</h2>
+        <div class="promo-value">Flexible payment. Simple explanation.</div>
+        <p class="note">Limited-time offer — available while supplies last at this kiosk.</p>
+      </div>
+      <button class="btn-primary" onclick="document.getElementById('footer').scrollIntoView()">Register Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- 5. HOW TO GET LG SUBSCRIBE -->
+<section style="background:var(--lg-mist);">
+  <div class="container">
+    <div class="section-head">
+      <h2>How to get LG Subscribe</h2>
+      <p>Three simple steps with help from our on-site team.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><h3>Choose your LG product</h3><p>Pick any eligible LG product available at this kiosk.</p></div>
+      <div class="step"><div class="num">02</div><h3>Select LG Subscribe</h3><p>Choose the subscription plan and period that suits your needs.</p></div>
+      <div class="step"><div class="num">03</div><h3>Complete registration</h3><p>Our staff completes your registration and you enjoy your product right away.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5b. SHOP BY CATEGORY -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2>Browse products by category</h2>
+      <p>Use these category pages when the customer is ready to compare models, OutRight prices, and 12 / 24 / 36 month rental plans.</p>
+    </div>
+    <div class="category-grid">
+      <a class="category-card" href="refrigerator/">
+        <div><div class="cat-icon">🧊</div><h3>Refrigerator</h3><p>Bottom freezer, French door, side-by-side and eligible refrigerator models.</p></div>
+        <span class="cat-link">View refrigerator pricing →</span>
+      </a>
+      <a class="category-card" href="tv/">
+        <div><div class="cat-icon">📺</div><h3>TV</h3><p>Compare eligible OLED, QNED, UHD and large-screen TV models.</p></div>
+        <span class="cat-link">View TV pricing →</span>
+      </a>
+      <a class="category-card" href="appliances/">
+        <div><div class="cat-icon">🧺</div><h3>Appliances</h3><p>Washing, cooking, air care and everyday LG home appliance categories.</p></div>
+        <span class="cat-link">View appliance pricing →</span>
+      </a>
+      <a class="category-card" href="audio-video/">
+        <div><div class="cat-icon">🔊</div><h3>Audio/Video</h3><p>Audio, video and merged accessory-style products in one simple bucket.</p></div>
+        <span class="cat-link">View Audio/Video pricing →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 6. FINAL CTA -->
+<section>
+  <div class="container">
+    <div class="final-cta">
+      <h2>Ready to start your LG Subscribe plan?</h2>
+      <div class="hero-ctas">
+        <button class="btn-primary" onclick="document.getElementById('footer').scrollIntoView()">Register Now</button>
+        <button class="btn-secondary" onclick="document.getElementById('footer').scrollIntoView()">Talk to Our Sales Team</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="foot-grid">
       <div>
-        <h2 data-i18n="catalogTitle">Product catalogue</h2>
-        <p data-i18n="catalogCopy">Pricing is read directly from the workbook in this folder. Product images can be added through the model image map as official LG URLs become available.</p>
+        <div class="foot-logo">LG <span>Subscribe</span></div>
       </div>
-      <div id="status" class="status" data-i18n="loading">Loading workbook...</div>
-    </div>
-    <div id="tabs" class="category-tabs" aria-label="Product categories"></div>
-    <div id="grid" class="grid"></div>
-    <div id="empty" class="empty" hidden data-i18n="empty">No products match these filters.</div>
-  </div>
-</section>
-
-<section id="story" class="story">
-  <div class="container story-grid">
-    <div>
-      <div class="eyebrow" data-i18n="storyEyebrow">How it sells</div>
-      <h2 data-i18n="storyTitle">A simple choice at the shelf.</h2>
-      <p data-i18n="storyCopy">Customers should not need to decode a price sheet. The page frames each product around one buying decision: pay OutRight today or spread the product cost across a rental period.</p>
-    </div>
-    <div class="method-grid">
-      <div class="method">
-        <strong data-i18n="outrightTitle">OutRight</strong>
-        <span data-i18n="outrightCopy">Direct purchase pricing from the workbook, presented beside the rental plan for fast comparison.</span>
+      <div class="foot-col">
+        <h4>LG Subscribe</h4>
+        <a href="#subscribe">Plans &amp; pricing</a>
+        <a href="#promo">Current offer</a>
       </div>
-      <div class="method">
-        <strong data-i18n="monthlyTitle">Rental monthly</strong>
-        <span data-i18n="monthlyCopy">12, 24, and 36 month payment options are visible on every product card.</span>
+      <div class="foot-col">
+        <h4>Support</h4>
+        <p>Ask a staff member at this kiosk</p>
+        <p>Customer care: [SUPPORT PHONE NUMBER]</p>
+        <p>[SUPPORT EMAIL]</p>
       </div>
-      <div class="method">
-        <strong data-i18n="totalTitle">Plan total</strong>
-        <span data-i18n="totalCopy">The selected plan total is shown so customers understand the full amount paid.</span>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="#">Privacy Policy</a>
       </div>
     </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container footer-row">
-    <div data-i18n="footerLeft">LG Subscribe catalogue prototype.</div>
-    <div data-i18n="footerRight">Workbook and landing page are ready for GitHub.</div>
+    <div class="foot-bottom">© 2026 LG Electronics. All rights reserved. · Displayed on LG STANBYME at this kiosk.</div>
   </div>
 </footer>
 
-<script>
-const WORKBOOK_FILE = "28082026. Total product on MiniApp.xlsx";
-const IMAGE_BY_MODEL = {
-  // Add approved official LG image URLs here:
-  // "LBB33BLM": "https://www.lg.com/.../LBB33BLM.jpg"
-};
-
-const UI = {
-  en: {
-    brandSub: "Product catalogue",
-    browseNav: "Browse products",
-    plansNav: "Compare plans",
-    eyebrow: "OutRight or Rental",
-    headline: "Choose the LG product now. Choose how to pay next.",
-    heroCopy: "A simple catalogue for LG Subscribe: filter by category, compare OutRight pricing with 12, 24, and 36 month plans, then open LG.com to source official product images.",
-    browseCta: "Browse catalogue",
-    methodCta: "See payment methods",
-    heroPanelLabel: "Live workbook",
-    productsLoaded: "products loaded",
-    lowestPayment: "lowest 36 month payment",
-    reset: "Reset",
-    loading: "Loading workbook...",
-    catalogTitle: "Product catalogue",
-    catalogCopy: "Pricing is read directly from the workbook in this folder. Product images can be added through the model image map as official LG URLs become available.",
-    empty: "No products match these filters.",
-    storyEyebrow: "How it sells",
-    storyTitle: "A simple choice at the shelf.",
-    storyCopy: "Customers should not need to decode a price sheet. The page frames each product around one buying decision: pay OutRight today or spread the product cost across a rental period.",
-    outrightTitle: "OutRight",
-    outrightCopy: "Direct purchase pricing from the workbook, presented beside the rental plan for fast comparison.",
-    monthlyTitle: "Rental monthly",
-    monthlyCopy: "12, 24, and 36 month payment options are visible on every product card.",
-    totalTitle: "Plan total",
-    totalCopy: "The selected plan total is shown so customers understand the full amount paid.",
-    footerLeft: "LG Subscribe catalogue prototype.",
-    footerRight: "Workbook and landing page are ready for GitHub.",
-    allCategories: "All categories",
-    allTypes: "All types",
-    allProducts: "All products",
-    search: "Search model, suffix, type",
-    sortMonthly: "Lowest monthly",
-    sortOutright: "Lowest OutRight",
-    sortModel: "Model A-Z",
-    plan12: "12 months",
-    plan24: "24 months",
-    plan36: "36 months",
-    shown: "products shown",
-    of: "of",
-    imagePending: "Image pending",
-    findImage: "Find image",
-    lgCom: "LG.com",
-    selectedTotal: "month total",
-    outright: "OutRight",
-    loadError: "Workbook could not be loaded. Check that the spreadsheet sits beside index.html and preview the page from a local web server.",
-    categories: {
-      "Air Solution": "Air Solution",
-      "Audio/Video": "Audio/Video",
-      "Cooking Appliance": "Cooking Appliance",
-      "Healthcare": "Healthcare",
-      "Refrigerator": "Refrigerator",
-      "TV": "TV",
-      "Washing Machine": "Washing Machine"
-    }
-  },
-  vi: {
-    brandSub: "Danh mục sản phẩm",
-    browseNav: "Xem sản phẩm",
-    plansNav: "So sánh gói",
-    eyebrow: "Mua đứt hoặc Thuê",
-    headline: "Chọn sản phẩm LG trước. Chọn cách thanh toán sau.",
-    heroCopy: "Danh mục đơn giản cho LG Subscribe: lọc theo nhóm sản phẩm, so sánh giá mua đứt với gói 12, 24, 36 tháng, rồi mở LG.com để lấy hình ảnh chính thức.",
-    browseCta: "Xem danh mục",
-    methodCta: "Xem cách thanh toán",
-    heroPanelLabel: "Dữ liệu từ workbook",
-    productsLoaded: "sản phẩm đã tải",
-    lowestPayment: "thanh toán thấp nhất 36 tháng",
-    reset: "Đặt lại",
-    loading: "Đang tải workbook...",
-    catalogTitle: "Danh mục sản phẩm",
-    catalogCopy: "Giá được đọc trực tiếp từ workbook trong thư mục này. Hình sản phẩm có thể thêm bằng bảng map model sang URL chính thức của LG.",
-    empty: "Không có sản phẩm phù hợp với bộ lọc.",
-    storyEyebrow: "Cách trình bày",
-    storyTitle: "Một lựa chọn rõ ràng ngay tại quầy.",
-    storyCopy: "Khách hàng không cần tự đọc bảng giá phức tạp. Trang này đặt mỗi sản phẩm vào một quyết định đơn giản: mua đứt hôm nay hoặc trả dần theo kỳ thuê.",
-    outrightTitle: "Mua đứt",
-    outrightCopy: "Giá mua trực tiếp từ workbook, đặt cạnh gói thuê để khách so sánh nhanh.",
-    monthlyTitle: "Thanh toán hằng tháng",
-    monthlyCopy: "Các lựa chọn 12, 24 và 36 tháng hiển thị trên từng thẻ sản phẩm.",
-    totalTitle: "Tổng gói",
-    totalCopy: "Tổng thanh toán của gói đang chọn được hiển thị để khách hiểu toàn bộ chi phí.",
-    footerLeft: "Prototype danh mục LG Subscribe.",
-    footerRight: "Workbook và landing page đã sẵn sàng cho GitHub.",
-    allCategories: "Tất cả nhóm",
-    allTypes: "Tất cả loại",
-    allProducts: "Tất cả sản phẩm",
-    search: "Tìm model, suffix, loại",
-    sortMonthly: "Thanh toán thấp nhất",
-    sortOutright: "Mua đứt thấp nhất",
-    sortModel: "Model A-Z",
-    plan12: "12 tháng",
-    plan24: "24 tháng",
-    plan36: "36 tháng",
-    shown: "sản phẩm đang hiển thị",
-    of: "trên",
-    imagePending: "Chờ hình ảnh",
-    findImage: "Tìm hình",
-    lgCom: "LG.com",
-    selectedTotal: "tháng tổng cộng",
-    outright: "Mua đứt",
-    loadError: "Không tải được workbook. Hãy kiểm tra file spreadsheet nằm cùng index.html và xem trang bằng local web server.",
-    categories: {
-      "Air Solution": "Điều hòa & không khí",
-      "Audio/Video": "Âm thanh / Hình ảnh",
-      "Cooking Appliance": "Thiết bị nấu nướng",
-      "Healthcare": "Chăm sóc sức khỏe",
-      "Refrigerator": "Tủ lạnh",
-      "TV": "TV",
-      "Washing Machine": "Máy giặt"
-    }
-  }
-};
-
-let lang = localStorage.getItem("lg-subscribe-lang") || "en";
-let products = [];
-let filteredCategory = "all";
-
-const els = {
-  search: document.getElementById("search"),
-  category: document.getElementById("category"),
-  type: document.getElementById("type"),
-  sort: document.getElementById("sort"),
-  plan: document.getElementById("plan"),
-  reset: document.getElementById("reset"),
-  tabs: document.getElementById("tabs"),
-  grid: document.getElementById("grid"),
-  empty: document.getElementById("empty"),
-  status: document.getElementById("status"),
-  heroCount: document.getElementById("heroCount"),
-  heroFrom: document.getElementById("heroFrom")
-};
-
-const moneyFormat = new Intl.NumberFormat("vi-VN", {
-  style: "currency",
-  currency: "VND",
-  maximumFractionDigits: 0
-});
-const toNumber = value => Number.isFinite(+value) ? Math.round(+value) : null;
-const money = value => value ? moneyFormat.format(value) : "n.a.";
-const text = key => UI[lang][key];
-const categoryLabel = category => UI[lang].categories[category] || category;
-
-function sheetRows(workbook, name) {
-  return XLSX.utils.sheet_to_json(workbook.Sheets[name], { header: 1, raw: true, defval: "" });
-}
-
-function normalizeCategory(value, code) {
-  if (!value || value === "#N/A") {
-    return ({ ES: "Air Solution", AV: "Audio/Video", AO: "Audio/Video" })[code] || "Audio/Video";
-  }
-  if (value === "ES") return "Air Solution";
-  if (value === "AV" || value === "AO") return "Audio/Video";
-  if (value === "Appliance" || value === "Audio / Video" || value === "Other") return "Audio/Video";
-  return value;
-}
-
-function parseWorkbook(workbook) {
-  const priceRows = sheetRows(workbook, "Total MiniApp");
-  const levelRows = sheetRows(workbook, "Product level");
-  const levelBySuffix = new Map(levelRows.slice(3).filter(row => row[4]).map(row => [row[4], row]));
-  return priceRows.slice(3).filter(row => row[3] && row[4]).map(row => {
-    const level = levelBySuffix.get(row[4]) || [];
-    return {
-      productCode: row[1],
-      subCode: row[2],
-      model: row[3],
-      suffix: row[4],
-      outright: toNumber(row[5]) || toNumber(row[10]) || toNumber(row[6]) || toNumber(row[11]),
-      monthly12: toNumber(row[7]),
-      monthly24: toNumber(row[8]),
-      monthly36: toNumber(row[9]),
-      total12: toNumber(row[12]),
-      total24: toNumber(row[13]),
-      total36: toNumber(row[14]),
-      category: normalizeCategory(level[7], row[1]),
-      type: level[9] || row[2],
-      series: level[11] || "",
-      variant: level[13] || ""
-    };
-  });
-}
-
-function lgSearch(value) {
-  return `https://www.lg.com/vn/search/?search=${encodeURIComponent(value)}`;
-}
-
-function imageFor(product) {
-  return IMAGE_BY_MODEL[product.model] || IMAGE_BY_MODEL[product.suffix] || "";
-}
-
-function setStaticText() {
-  document.documentElement.lang = lang;
-  document.querySelectorAll("[data-i18n]").forEach(node => {
-    const key = node.dataset.i18n;
-    if (UI[lang][key]) node.textContent = UI[lang][key];
-  });
-  document.querySelectorAll("[data-lang]").forEach(button => {
-    button.classList.toggle("active", button.dataset.lang === lang);
-  });
-  els.search.placeholder = text("search");
-  els.sort.innerHTML = `
-    <option value="monthly36">${text("sortMonthly")}</option>
-    <option value="outright">${text("sortOutright")}</option>
-    <option value="model">${text("sortModel")}</option>
-  `;
-  els.plan.innerHTML = `
-    <option value="36">${text("plan36")}</option>
-    <option value="24">${text("plan24")}</option>
-    <option value="12">${text("plan12")}</option>
-  `;
-}
-
-function renderOptions() {
-  const categories = [...new Set(products.map(product => product.category))].sort();
-  els.category.innerHTML = `<option value="all">${text("allCategories")}</option>` +
-    categories.map(category => `<option value="${category}">${categoryLabel(category)}</option>`).join("");
-  renderTabs(categories);
-}
-
-function renderTabs(categories) {
-  els.tabs.innerHTML = ["all", ...categories].map(category => {
-    const label = category === "all" ? text("allProducts") : categoryLabel(category);
-    return `<button type="button" class="tab ${category === filteredCategory ? "active" : ""}" data-cat="${category}">${label}</button>`;
-  }).join("");
-  els.tabs.querySelectorAll("button").forEach(button => {
-    button.addEventListener("click", () => {
-      filteredCategory = button.dataset.cat;
-      els.category.value = filteredCategory;
-      render();
-    });
-  });
-}
-
-function renderTypes(list) {
-  const current = els.type.value;
-  const types = [...new Set(list.map(product => product.type).filter(Boolean))].sort();
-  els.type.innerHTML = `<option value="all">${text("allTypes")}</option>` +
-    types.map(type => `<option value="${type}">${type}</option>`).join("");
-  els.type.value = types.includes(current) ? current : "all";
-}
-
-function card(product) {
-  const planMonths = els.plan.value;
-  const total = product[`total${planMonths}`];
-  const source = imageFor(product);
-  const imageMarkup = source
-    ? `<img src="${source}" alt="${product.model}" onerror="this.remove();this.parentElement.insertAdjacentHTML('beforeend','<div class=&quot;placeholder&quot;>${text("imagePending")}<br>${product.model}</div>')">`
-    : `<div class="placeholder">${text("imagePending")}<br>${product.model}</div>`;
-  return `
-    <article class="card">
-      <div class="media">
-        <span class="badge">${categoryLabel(product.category)}</span>
-        ${imageMarkup}
-      </div>
-      <div class="card-body">
-        <div class="kicker">${product.type || product.subCode}</div>
-        <div class="model">${product.model}</div>
-        <div class="meta">${product.variant || product.series || product.suffix}<br>${product.suffix}</div>
-        <div class="price-row">
-          <div class="price"><span>${text("outright")}</span><strong>${money(product.outright)}</strong></div>
-          <div class="price"><span>${planMonths} ${text("selectedTotal")}</span><strong>${money(total)}</strong></div>
-        </div>
-        <div class="plans">
-          <div class="plan"><span>${text("plan12")}</span><strong>${money(product.monthly12)}</strong></div>
-          <div class="plan"><span>${text("plan24")}</span><strong>${money(product.monthly24)}</strong></div>
-          <div class="plan"><span>${text("plan36")}</span><strong>${money(product.monthly36)}</strong></div>
-        </div>
-        <div class="card-links">
-          <a class="card-link primary" href="${lgSearch(product.model)}" target="_blank" rel="noopener">${text("findImage")}</a>
-          <a class="card-link" href="${lgSearch(product.suffix)}" target="_blank" rel="noopener">${text("lgCom")}</a>
-        </div>
-      </div>
-    </article>
-  `;
-}
-
-function render() {
-  const query = els.search.value.trim().toLowerCase();
-  const category = els.category.value || filteredCategory;
-  filteredCategory = category;
-  let list = products.slice();
-  if (category !== "all") list = list.filter(product => product.category === category);
-  renderTypes(list);
-  if (els.type.value !== "all") list = list.filter(product => product.type === els.type.value);
-  if (query) {
-    list = list.filter(product => [
-      product.model,
-      product.suffix,
-      product.category,
-      product.type,
-      product.variant,
-      product.series
-    ].join(" ").toLowerCase().includes(query));
-  }
-  const key = els.sort.value;
-  list.sort((a, b) => key === "model" ? a.model.localeCompare(b.model) : (a[key] || Infinity) - (b[key] || Infinity));
-  els.grid.innerHTML = list.map(card).join("");
-  els.empty.hidden = list.length > 0;
-  els.status.textContent = `${list.length} ${text("of")} ${products.length} ${text("shown")}`;
-  els.tabs.querySelectorAll(".tab").forEach(button => {
-    button.classList.toggle("active", button.dataset.cat === filteredCategory);
-  });
-}
-
-async function loadWorkbook() {
-  try {
-    const response = await fetch(WORKBOOK_FILE);
-    if (!response.ok) throw new Error(WORKBOOK_FILE);
-    const buffer = await response.arrayBuffer();
-    products = parseWorkbook(XLSX.read(buffer));
-    renderOptions();
-    els.heroCount.textContent = products.length;
-    els.heroFrom.textContent = money(Math.min(...products.map(product => product.monthly36).filter(Boolean)));
-    render();
-  } catch (error) {
-    els.status.textContent = text("loadError");
-    els.grid.innerHTML = `<div class="empty">${text("loadError")}</div>`;
-  }
-}
-
-document.querySelectorAll("[data-scroll]").forEach(button => {
-  button.addEventListener("click", () => document.getElementById(button.dataset.scroll).scrollIntoView());
-});
-document.querySelectorAll("[data-lang]").forEach(button => {
-  button.addEventListener("click", () => {
-    lang = button.dataset.lang;
-    localStorage.setItem("lg-subscribe-lang", lang);
-    const sortValue = els.sort.value || "monthly36";
-    const planValue = els.plan.value || "36";
-    setStaticText();
-    els.sort.value = sortValue;
-    els.plan.value = planValue;
-    renderOptions();
-    render();
-  });
-});
-[els.search, els.category, els.type, els.sort, els.plan].forEach(element => element.addEventListener("input", render));
-els.reset.addEventListener("click", () => {
-  els.search.value = "";
-  els.category.value = "all";
-  els.type.value = "all";
-  els.sort.value = "monthly36";
-  els.plan.value = "36";
-  filteredCategory = "all";
-  render();
-});
-
-setStaticText();
-loadWorkbook();
-</script>
 </body>
 </html>
