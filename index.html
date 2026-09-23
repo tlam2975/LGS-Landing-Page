@@ -6,7 +6,7 @@
 <title>LG Subscribe Catalogue</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
 :root {
@@ -22,7 +22,7 @@
   --sage: #47675c;
   --line: rgba(21, 19, 22, .14);
   --shadow: 0 22px 60px rgba(51, 30, 38, .15);
-  --radius: 8px;
+  --radius: 14px;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -30,7 +30,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "Be Vietnam Pro", Inter, system-ui, sans-serif;
+  font-family: Montserrat, Inter, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 button, input, select { font: inherit; }
@@ -64,7 +64,7 @@ a { color: inherit; }
   object-fit: contain;
 }
 .brand-mark {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 19px;
   font-weight: 700;
   line-height: 1;
@@ -160,7 +160,7 @@ a { color: inherit; }
   background: var(--red);
 }
 h1, h2, h3, .display {
-  font-family: "Space Grotesk", "Be Vietnam Pro", sans-serif;
+  font-family: Montserrat, sans-serif;
   letter-spacing: 0;
 }
 .hero h1 {
@@ -241,7 +241,7 @@ h1, h2, h3, .display {
 }
 .stat strong {
   display: block;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 29px;
   line-height: 1;
 }
@@ -409,7 +409,7 @@ section { padding: 76px 0; }
   text-transform: uppercase;
 }
 .model {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 24px;
   font-weight: 700;
   line-height: 1.05;
@@ -527,21 +527,12 @@ section { padding: 76px 0; }
 .method strong {
   display: block;
   margin-bottom: 10px;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 26px;
 }
 .method span {
   color: rgba(255, 255, 255, .74);
   line-height: 1.55;
-}
-.image-note {
-  margin-top: 16px;
-  border: 1px solid rgba(255, 255, 255, .18);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, .08);
-  padding: 16px;
-  color: rgba(255, 255, 255, .78);
-  line-height: 1.58;
 }
 .footer {
   border-top: 1px solid var(--line);
@@ -695,7 +686,6 @@ section { padding: 76px 0; }
       <div class="eyebrow" data-i18n="storyEyebrow">How it sells</div>
       <h2 data-i18n="storyTitle">A simple choice at the shelf.</h2>
       <p data-i18n="storyCopy">Customers should not need to decode a price sheet. The page frames each product around one buying decision: pay OutRight today or spread the product cost across a rental period.</p>
-      <div class="image-note" data-i18n="imageNote">Image workflow: each card checks an approved model-to-image map first. If the image is missing, the card keeps its layout with a placeholder and gives staff a direct LG.com model lookup.</div>
     </div>
     <div class="method-grid">
       <div class="method">
@@ -749,7 +739,6 @@ const UI = {
     storyEyebrow: "How it sells",
     storyTitle: "A simple choice at the shelf.",
     storyCopy: "Customers should not need to decode a price sheet. The page frames each product around one buying decision: pay OutRight today or spread the product cost across a rental period.",
-    imageNote: "Image workflow: each card checks an approved model-to-image map first. If the image is missing, the card keeps its layout with a placeholder and gives staff a direct LG.com model lookup.",
     outrightTitle: "OutRight",
     outrightCopy: "Direct purchase pricing from the workbook, presented beside the rental plan for fast comparison.",
     monthlyTitle: "Rental monthly",
@@ -808,7 +797,6 @@ const UI = {
     storyEyebrow: "Cách trình bày",
     storyTitle: "Một lựa chọn rõ ràng ngay tại quầy.",
     storyCopy: "Khách hàng không cần tự đọc bảng giá phức tạp. Trang này đặt mỗi sản phẩm vào một quyết định đơn giản: mua đứt hôm nay hoặc trả dần theo kỳ thuê.",
-    imageNote: "Quy trình hình ảnh: mỗi thẻ sản phẩm kiểm tra bảng map hình chính thức trước. Nếu chưa có hình, thẻ vẫn giữ bố cục bằng placeholder và có link tìm model trực tiếp trên LG.com.",
     outrightTitle: "Mua đứt",
     outrightCopy: "Giá mua trực tiếp từ workbook, đặt cạnh gói thuê để khách so sánh nhanh.",
     monthlyTitle: "Thanh toán hằng tháng",
