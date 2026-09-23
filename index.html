@@ -795,11 +795,9 @@ const UI = {
     loadError: "Workbook could not be loaded. Check that the spreadsheet sits beside index.html and preview the page from a local web server.",
     categories: {
       "Air Solution": "Air Solution",
-      "Appliance": "Appliance",
-      "Audio / Video": "Audio / Video",
+      "Audio/Video": "Audio/Video",
       "Cooking Appliance": "Cooking Appliance",
       "Healthcare": "Healthcare",
-      "Other": "Other",
       "Refrigerator": "Refrigerator",
       "TV": "TV",
       "Washing Machine": "Washing Machine"
@@ -853,11 +851,9 @@ const UI = {
     loadError: "Không tải được workbook. Hãy kiểm tra file spreadsheet nằm cùng index.html và xem trang bằng local web server.",
     categories: {
       "Air Solution": "Điều hòa & không khí",
-      "Appliance": "Thiết bị gia dụng",
-      "Audio / Video": "Âm thanh / Hình ảnh",
+      "Audio/Video": "Âm thanh / Hình ảnh",
       "Cooking Appliance": "Thiết bị nấu nướng",
       "Healthcare": "Chăm sóc sức khỏe",
-      "Other": "Khác",
       "Refrigerator": "Tủ lạnh",
       "TV": "TV",
       "Washing Machine": "Máy giặt"
@@ -900,11 +896,11 @@ function sheetRows(workbook, name) {
 
 function normalizeCategory(value, code) {
   if (!value || value === "#N/A") {
-    return ({ ES: "Air Solution", AV: "Audio / Video", AO: "Appliance" })[code] || "Other";
+    return ({ ES: "Air Solution", AV: "Audio/Video", AO: "Audio/Video" })[code] || "Audio/Video";
   }
   if (value === "ES") return "Air Solution";
-  if (value === "AV") return "Audio / Video";
-  if (value === "AO") return "Appliance";
+  if (value === "AV" || value === "AO") return "Audio/Video";
+  if (value === "Appliance" || value === "Audio / Video" || value === "Other") return "Audio/Video";
   return value;
 }
 
