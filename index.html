@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LG STANBYME — Your Screen, Your Way</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lg-white:#FFFFFF;
+    --lg-red:#A50034;
+    --lg-red-dark:#7C0027;
+    --lg-ink:#17181A;
+    --lg-mist:#F4F4F6;
+    --lg-line:#E5E5E8;
+    --lg-sub:#6B6B70;
+    --lg-red-tint:#FBE9EE;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    box-sizing:border-box;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+  html,body{height:100%;}
+  body{
+    margin:0; background:var(--lg-white); color:var(--lg-ink);
+    font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.headline{font-family:'Poppins',sans-serif;}
+  img,svg{max-width:100%;}
+  .wide{width:100%; overflow-x:auto;}
+  .container{max-width:1180px; margin:0 auto; padding:0 32px;}
+  section{padding:96px 0;}
+  @media(max-width:640px){ section{padding:64px 0;} .container{padding:0 20px;} }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; top:env(safe-area-inset-top,0px); z-index:50;
+    background:rgba(255,255,255,.88); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--lg-line);
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between; height:76px;}
+  .nav-logo{font-family:'Poppins'; font-weight:700; font-size:22px; letter-spacing:.5px;}
+  .nav-logo span{color:var(--lg-red);}
+  .nav-cta{
+    background:var(--lg-red); color:#fff; border:none; padding:14px 26px;
+    border-radius:999px; font-family:'Inter'; font-weight:600; font-size:15px;
+    cursor:pointer; transition:transform .15s ease, background .2s ease;
+  }
+  .nav-cta:hover{background:var(--lg-red-dark); transform:translateY(-1px);}
+
+  /* HERO */
+  .hero{
+    padding:88px 0 64px; text-align:center; position:relative;
+    background:radial-gradient(ellipse at 50% 0%, #fff 0%, var(--lg-mist) 120%);
+  }
+  .eyebrow-pill{
+    display:inline-block; background:var(--lg-red-tint); color:var(--lg-red);
+    font-weight:600; font-size:14px; padding:8px 18px; border-radius:999px; margin-bottom:28px;
+    opacity:0; animation:rise .6s ease forwards;
+  }
+  .hero h1{
+    font-size:clamp(38px,6vw,66px); line-height:1.06; font-weight:700; margin:0 0 22px;
+    opacity:0; animation:rise .7s ease .1s forwards;
+  }
+  .hero h1 .accent{color:var(--lg-red);}
+  .hero p.lede{
+    font-size:clamp(17px,2vw,21px); color:var(--lg-sub); max-width:620px; margin:0 auto 40px;
+    line-height:1.6; opacity:0; animation:rise .7s ease .2s forwards;
+  }
+  .hero-ctas{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:64px;
+    opacity:0; animation:rise .7s ease .3s forwards;}
+  .btn-primary, .btn-secondary{
+    font-family:'Inter'; font-weight:600; font-size:17px; padding:18px 34px; border-radius:999px;
+    cursor:pointer; transition:transform .15s ease, box-shadow .2s ease, background .2s ease; border:none;
+  }
+  .btn-primary{background:var(--lg-red); color:#fff; box-shadow:0 10px 24px -8px rgba(165,0,52,.5);}
+  .btn-primary:hover{background:var(--lg-red-dark); transform:translateY(-2px);}
+  .btn-secondary{background:#fff; color:var(--lg-ink); border:1.5px solid var(--lg-line);}
+  .btn-secondary:hover{border-color:var(--lg-ink); transform:translateY(-2px);}
+
+  /* Product visual (CSS-drawn STANBYME) */
+  .device-wrap{display:flex; justify-content:center; opacity:0; animation:rise .8s ease .35s forwards;}
+  .subscribe-card{
+    width:min(90vw,420px); background:#fff; border:1px solid var(--lg-line); border-radius:22px;
+    padding:32px 30px; box-shadow:0 30px 60px -30px rgba(0,0,0,.25); text-align:left;
+  }
+  .sc-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .sc-chip{background:var(--lg-red-tint); color:var(--lg-red); font-size:13px; font-weight:600; padding:6px 14px; border-radius:999px;}
+  .sc-cycle{color:var(--lg-red); font-size:20px;}
+  .sc-amount{font-family:'Poppins'; font-weight:700; font-size:36px; margin-bottom:22px;}
+  .sc-amount span{font-family:'Inter'; font-weight:500; font-size:16px; color:var(--lg-sub);}
+  .sc-line{height:1px; background:var(--lg-line); margin-bottom:20px;}
+  .sc-item{display:flex; justify-content:space-between; gap:16px; margin-bottom:14px; font-size:14.5px;}
+  .sc-item span{color:var(--lg-sub);}
+  .sc-item strong{font-weight:600; text-align:right;}
+  @keyframes rise{from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);}}
+  @media (prefers-reduced-motion: reduce){
+    .eyebrow-pill,.hero h1,.hero p.lede,.hero-ctas,.device-wrap{animation:none; opacity:1;}
+  }
+
+  /* HIGHLIGHTS */
+  .section-head{text-align:center; max-width:640px; margin:0 auto 56px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px); font-weight:600; margin:0 0 14px;}
+  .section-head p{color:var(--lg-sub); font-size:17px; line-height:1.6; margin:0;}
+  .grid-highlights{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:22px;
+  }
+  .hi-card{
+    background:#fff; border:1px solid var(--lg-line); border-radius:20px; padding:32px 24px;
+    text-align:center; transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .hi-card:hover{transform:translateY(-4px); box-shadow:0 20px 40px -24px rgba(0,0,0,.25);}
+  .hi-icon{
+    width:52px; height:52px; margin:0 auto 18px; border-radius:14px; background:var(--lg-red-tint);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hi-card h3{font-size:17px; font-weight:600; margin:0 0 8px;}
+  .hi-card p{font-size:14.5px; color:var(--lg-sub); margin:0; line-height:1.5;}
+
+  /* SUBSCRIBE */
+  .subscribe{background:var(--lg-ink); color:#fff;}
+  .subscribe .section-head p{color:#c9c9cc;}
+  .subscribe .section-head h2{color:#fff;}
+  .sub-layout{display:grid; grid-template-columns:1.1fr 1fr; gap:48px; align-items:center;}
+  @media(max-width:860px){.sub-layout{grid-template-columns:1fr;}}
+  .price-card{
+    background:linear-gradient(155deg,#fff,#FBE9EE); color:var(--lg-ink); border-radius:24px;
+    padding:40px 36px; text-align:center;
+  }
+  .price-card .tag{font-size:14px; font-weight:600; color:var(--lg-red); margin-bottom:10px;}
+  .price-card .amount{font-size:44px; font-weight:700; font-family:'Poppins'; margin:0 0 4px;}
+  .price-card .period{color:var(--lg-sub); font-size:15px; margin-bottom:26px;}
+  .price-card .btn-primary{width:100%;}
+  .sub-features{list-style:none; padding:0; margin:0 0 32px; display:grid; gap:18px;}
+  .sub-features li{display:flex; gap:14px; font-size:16px; line-height:1.5; color:#e4e4e6;}
+  .sub-features .check{
+    flex:none; width:24px; height:24px; border-radius:50%; background:var(--lg-red);
+    display:flex; align-items:center; justify-content:center; margin-top:2px;
+  }
+
+  /* PROMOTION */
+  .promo{
+    background:var(--lg-red); color:#fff; border-radius:28px; padding:56px 44px;
+    display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;
+    box-shadow:0 30px 60px -30px rgba(165,0,52,.6);
+  }
+  .promo-left{max-width:560px;}
+  .promo .badge{
+    display:inline-block; background:rgba(255,255,255,.18); padding:7px 16px; border-radius:999px;
+    font-size:13px; font-weight:600; margin-bottom:18px; letter-spacing:.3px;
+  }
+  .promo h2{font-size:clamp(26px,3vw,36px); margin:0 0 12px; font-weight:600;}
+  .promo .promo-value{font-size:clamp(30px,3.6vw,44px); font-weight:700; font-family:'Poppins'; margin:0 0 14px;}
+  .promo p.note{margin:0; opacity:.9; font-size:15px;}
+  .promo .btn-primary{background:#fff; color:var(--lg-red); box-shadow:none;}
+  .promo .btn-primary:hover{background:#f2f2f2;}
+
+  /* STEPS */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  @media(max-width:760px){.steps{grid-template-columns:1fr;}}
+  .step{text-align:center; padding:0 12px;}
+  .step .num{
+    width:56px; height:56px; border-radius:50%; border:2px solid var(--lg-red); color:var(--lg-red);
+    display:flex; align-items:center; justify-content:center; font-family:'Poppins'; font-weight:600;
+    font-size:19px; margin:0 auto 20px;
+  }
+  .step h3{font-size:18px; font-weight:600; margin:0 0 8px;}
+  .step p{color:var(--lg-sub); font-size:15px; margin:0; line-height:1.5;}
+  .step-divider{display:flex; align-items:center; justify-content:center; color:var(--lg-line); font-size:22px;}
+
+  /* FINAL CTA */
+  .final-cta{
+    text-align:center; background:var(--lg-mist); border-radius:28px; padding:72px 32px;
+  }
+  .final-cta h2{font-size:clamp(28px,3.6vw,42px); margin:0 0 32px; font-weight:600;}
+  .final-cta .hero-ctas{opacity:1; animation:none; margin-bottom:0;}
+
+  /* FOOTER */
+  footer{background:var(--lg-ink); color:#c9c9cc; padding:56px 0 32px; font-size:14.5px;}
+  .foot-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:32px; margin-bottom:36px;}
+  .foot-logo{font-family:'Poppins'; font-weight:700; font-size:20px; color:#fff;}
+  .foot-logo span{color:#ff5c85;}
+  .foot-col h4{color:#fff; font-size:14px; font-weight:600; margin:0 0 14px;}
+  .foot-col p, .foot-col a{color:#a9a9ad; text-decoration:none; display:block; margin-bottom:8px; font-size:14px;}
+  .foot-col a:hover{color:#fff;}
+  .foot-bottom{border-top:1px solid #2c2c2e; padding-top:22px; text-align:center; color:#7c7c80; font-size:13px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-row">
+    <div class="nav-logo">LG <span>Subscribe</span></div>
+    <button class="nav-cta" onclick="document.getElementById('subscribe').scrollIntoView()">Explore LG Subscribe</button>
+  </div>
+</nav>
+
+<!-- 1. HERO -->
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow-pill">LG Subscribe</span>
+    <h1>Own It Monthly, <span class="accent">Live It Fully</span></h1>
+    <p class="lede">Get the LG products you want today, pay a simple monthly amount, and let LG take care of the rest — no large upfront cost, no long-term worry.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById('subscribe').scrollIntoView()">Explore LG Subscribe</button>
+      <button class="btn-secondary" onclick="document.getElementById('footer').scrollIntoView()">Contact Sales</button>
+    </div>
+    <div class="device-wrap">
+      <div class="subscribe-card">
+        <div class="sc-row">
+          <span class="sc-chip">Monthly plan</span>
+          <span class="sc-cycle">↻</span>
+        </div>
+        <div class="sc-amount">From ₫90.000<span>/month</span></div>
+        <div class="sc-line"></div>
+        <div class="sc-item"><span>Product</span><strong>Your choice of LG product</strong></div>
+        <div class="sc-item"><span>Period</span><strong>12 / 24 / 36 months</strong></div>
+        <div class="sc-item"><span>Includes</span><strong>[CARE SERVICE]</strong></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 2. WHY LG SUBSCRIBE -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2>Why customers choose LG Subscribe</h2>
+      <p>A simpler way to own the LG products you love.</p>
+    </div>
+    <div class="grid-highlights">
+      <div class="hi-card">
+        <div class="hi-icon">💳</div>
+        <h3>No upfront cost</h3>
+        <p>Start using your LG product today with a low, predictable monthly payment.</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">🗓️</div>
+        <h3>Flexible periods</h3>
+        <p>Choose the subscription length that fits your budget and lifestyle.</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">🛠️</div>
+        <h3>Care included</h3>
+        <p>[CARE SERVICE] keeps your product running smoothly for the life of your plan.</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">🛡️</div>
+        <h3>Backed by warranty</h3>
+        <p>Every plan comes with [WARRANTY] for full peace of mind.</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">🔁</div>
+        <h3>Works across products</h3>
+        <p>Apply LG Subscribe to a wide range of eligible LG products, in-store or here at the kiosk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2b. BROWSE BY CATEGORY (real pricing) -->
+<section style="background:var(--lg-mist);">
+  <div class="container">
+    <div class="section-head">
+      <h2>Every category, one monthly plan</h2>
+      <p>Starting price shown is for the lowest-priced model in each category on a 36-month plan. Ask staff for pricing on the specific model you want.</p>
+    </div>
+    <div class="grid-highlights">
+      <div class="hi-card">
+        <div class="hi-icon">🧊</div>
+        <h3>Refrigerators</h3>
+        <p>From <strong>₫240.000</strong>/month</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">📺</div>
+        <h3>TVs</h3>
+        <p>From <strong>₫320.000</strong>/month</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">🌬️</div>
+        <h3>Air Care</h3>
+        <p>From <strong>₫200.000</strong>/month</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">❄️</div>
+        <h3>Air Conditioners</h3>
+        <p>From <strong>₫380.000</strong>/month</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">🧺</div>
+        <h3>Washing Machines</h3>
+        <p>From <strong>₫740.000</strong>/month</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">🍽️</div>
+        <h3>Cooking</h3>
+        <p>From <strong>₫90.000</strong>/month</p>
+      </div>
+      <div class="hi-card">
+        <div class="hi-icon">🔊</div>
+        <h3>Audio</h3>
+        <p>From <strong>₫170.000</strong>/month</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. LG SUBSCRIBE OFFER -->
+<section class="subscribe" id="subscribe">
+  <div class="container">
+    <div class="section-head">
+      <h2>How LG Subscribe works</h2>
+      <p>One monthly plan covers your product and the care that comes with it — available on eligible LG products, including the display you're viewing this on.</p>
+    </div>
+    <div class="sub-layout">
+      <ul class="sub-features">
+        <li><span class="check">✓</span> Simple monthly payment — no large upfront cost</li>
+        <li><span class="check">✓</span> Choose a subscription period that fits you: [SUBSCRIPTION PERIOD]</li>
+        <li><span class="check">✓</span> Includes [CARE SERVICE] for peace of mind</li>
+        <li><span class="check">✓</span> Backed by [WARRANTY]</li>
+        <li><span class="check">✓</span> Plus [OTHER BENEFIT]</li>
+        <li><span class="check">✓</span> Guided registration with our on-site LG team</li>
+      </ul>
+    </div>
+    <div style="max-width:360px;margin:40px auto 0;">
+      <div class="price-card">
+        <div class="tag">LG Subscribe plan</div>
+        <div class="amount">From ₫90.000</div>
+        <div class="period">per month · plans from 12–36 months</div>
+        <button class="btn-primary" onclick="document.getElementById('promo').scrollIntoView()">See current offer</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. PROMOTION -->
+<section id="promo">
+  <div class="container">
+    <div class="promo">
+      <div class="promo-left">
+        <span class="badge">Special Offer</span>
+        <h2>A limited-time deal on LG Subscribe</h2>
+        <div class="promo-value">[INSERT CURRENT PROMOTION]</div>
+        <p class="note">Limited-time offer — available while supplies last at this kiosk.</p>
+      </div>
+      <button class="btn-primary" onclick="document.getElementById('footer').scrollIntoView()">Register Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- 5. HOW TO GET LG SUBSCRIBE -->
+<section style="background:var(--lg-mist);">
+  <div class="container">
+    <div class="section-head">
+      <h2>How to get LG Subscribe</h2>
+      <p>Three simple steps with help from our on-site team.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><h3>Choose your LG product</h3><p>Pick any eligible LG product available at this kiosk.</p></div>
+      <div class="step"><div class="num">02</div><h3>Select LG Subscribe</h3><p>Choose the subscription plan and period that suits your needs.</p></div>
+      <div class="step"><div class="num">03</div><h3>Complete registration</h3><p>Our staff completes your registration and you enjoy your product right away.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. FINAL CTA -->
+<section>
+  <div class="container">
+    <div class="final-cta">
+      <h2>Ready to start your LG Subscribe plan?</h2>
+      <div class="hero-ctas">
+        <button class="btn-primary" onclick="document.getElementById('footer').scrollIntoView()">Register Now</button>
+        <button class="btn-secondary" onclick="document.getElementById('footer').scrollIntoView()">Talk to Our Sales Team</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">LG <span>Subscribe</span></div>
+      </div>
+      <div class="foot-col">
+        <h4>LG Subscribe</h4>
+        <a href="#subscribe">Plans &amp; pricing</a>
+        <a href="#promo">Current offer</a>
+      </div>
+      <div class="foot-col">
+        <h4>Support</h4>
+        <p>Ask a staff member at this kiosk</p>
+        <p>Customer care: [SUPPORT PHONE NUMBER]</p>
+        <p>[SUPPORT EMAIL]</p>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 LG Electronics. All rights reserved. · Displayed on LG STANBYME at this kiosk.</div>
+  </div>
+</footer>
+
+</body>
+</html>
