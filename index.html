@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>LG Subscribe Catalogue</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -165,15 +167,16 @@ h1, h2, h3, .display {
 }
 .hero h1 {
   margin: 18px 0 18px;
-  max-width: 820px;
-  font-size: clamp(42px, 7vw, 84px);
-  line-height: .93;
+  max-width: 780px;
+  font-size: clamp(40px, 5.8vw, 74px);
+  line-height: 1.02;
+  font-weight: 800;
 }
 .hero-copy {
   max-width: 680px;
   color: var(--muted);
-  font-size: 18px;
-  line-height: 1.68;
+  font-size: 17px;
+  line-height: 1.7;
 }
 .hero-actions {
   display: flex;
@@ -291,8 +294,8 @@ section { padding: 76px 0; }
 }
 .section-head h2 {
   margin: 0 0 8px;
-  font-size: clamp(31px, 4vw, 50px);
-  line-height: 1;
+  font-size: clamp(30px, 3.5vw, 44px);
+  line-height: 1.08;
 }
 .section-head p {
   margin: 0;
@@ -495,29 +498,38 @@ section { padding: 76px 0; }
 .story {
   background: var(--ink);
   color: #fff;
+  overflow: hidden;
 }
 .story-grid {
   display: grid;
-  grid-template-columns: minmax(0, .95fr) minmax(0, 1.35fr);
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
   gap: 38px;
   align-items: start;
 }
+.story-grid > * {
+  min-width: 0;
+}
 .story h2 {
   margin: 0 0 16px;
-  font-size: clamp(32px, 4vw, 52px);
-  line-height: 1;
+  max-width: 720px;
+  font-size: clamp(30px, 3.35vw, 44px);
+  line-height: 1.12;
 }
 .story p {
   margin: 0;
+  max-width: 760px;
   color: rgba(255, 255, 255, .74);
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.72;
 }
 .method-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
+  min-width: 0;
 }
 .method {
+  min-width: 0;
   min-height: 190px;
   border: 1px solid rgba(255, 255, 255, .16);
   border-radius: var(--radius);
@@ -533,6 +545,20 @@ section { padding: 76px 0; }
 .method span {
   color: rgba(255, 255, 255, .74);
   line-height: 1.55;
+}
+:lang(vi) .hero h1 {
+  max-width: 860px;
+  font-size: clamp(36px, 5.15vw, 66px);
+  line-height: 1.08;
+}
+:lang(vi) .hero-copy,
+:lang(vi) .story p {
+  line-height: 1.78;
+}
+:lang(vi) .story h2 {
+  max-width: 740px;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.16;
 }
 .footer {
   border-top: 1px solid var(--line);
@@ -568,7 +594,8 @@ section { padding: 76px 0; }
   .nav-actions .button { display: none; }
   .language-toggle button { width: 40px; }
   .hero { padding: 48px 0 34px; }
-  .hero h1 { font-size: clamp(39px, 13vw, 58px); }
+  .hero h1 { font-size: clamp(36px, 11.5vw, 52px); line-height: 1.06; }
+  :lang(vi) .hero h1 { font-size: clamp(32px, 10.2vw, 46px); line-height: 1.12; }
   .hero-copy { font-size: 16px; }
   .hero-actions { display: grid; grid-template-columns: 1fr; }
   .button { width: 100%; }
@@ -597,7 +624,8 @@ section { padding: 76px 0; }
   .brand-mark { font-size: 17px; }
   .language-toggle button { width: 36px; }
   .plans { grid-template-columns: 1fr; }
-  .hero h1 { font-size: 37px; }
+  .hero h1 { font-size: 34px; }
+  :lang(vi) .hero h1 { font-size: 30px; }
 }
 </style>
 </head>
