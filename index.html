@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -8,7 +8,7 @@
 <link rel="apple-touch-icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --lg-white:#FFFFFF;
@@ -28,15 +28,15 @@
   html,body{height:100%;}
   body{
     margin:0; background:var(--lg-white); color:var(--lg-ink);
-    font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased;
+    font-family:'Montserrat',sans-serif; -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-  h1,h2,h3,.headline{font-family:'Poppins',sans-serif;}
+  h1,h2,h3,.headline{font-family:'Montserrat',sans-serif;}
   img,svg{max-width:100%;}
   .wide{width:100%; overflow-x:auto;}
   .container{max-width:1180px; margin:0 auto; padding:0 32px;}
   section{padding:96px 0;}
-  @media(max-width:640px){ section{padding:64px 0;} .container{padding:0 20px;} }
+  @media(max-width:640px){ section{padding:64px 0;} .container{padding:0 20px;} .nav-row{height:auto; min-height:76px; align-items:flex-start; flex-direction:column; padding:14px 0;} .nav-actions{width:100%; justify-content:space-between;} .nav-cta{padding:12px 18px;} }
 
   /* NAV */
   nav{
@@ -44,15 +44,19 @@
     background:rgba(255,255,255,.88); backdrop-filter:blur(10px);
     border-bottom:1px solid var(--lg-line);
   }
-  .nav-row{display:flex; align-items:center; justify-content:space-between; height:76px;}
-  .nav-logo{font-family:'Poppins'; font-weight:700; font-size:22px; letter-spacing:.5px;}
+  .nav-row{display:flex; align-items:center; justify-content:space-between; gap:18px; height:76px;}
+  .nav-logo{font-family:'Montserrat'; font-weight:800; font-size:22px; letter-spacing:.5px;}
   .nav-logo span{color:var(--lg-red);}
+  .nav-actions{display:flex; align-items:center; gap:14px;}
   .nav-cta{
     background:var(--lg-red); color:#fff; border:none; padding:14px 26px;
-    border-radius:999px; font-family:'Inter'; font-weight:600; font-size:15px;
+    border-radius:999px; font-family:'Montserrat'; font-weight:700; font-size:15px;
     cursor:pointer; transition:transform .15s ease, background .2s ease;
   }
   .nav-cta:hover{background:var(--lg-red-dark); transform:translateY(-1px);}
+  .lang-switch{display:flex; border:1px solid var(--lg-line); border-radius:999px; background:#fff; padding:3px;}
+  .lang-btn{min-width:42px; border:0; border-radius:999px; background:transparent; color:var(--lg-sub); padding:8px 10px; font-family:'Montserrat'; font-weight:800; cursor:pointer;}
+  .lang-btn.active{background:var(--lg-red); color:#fff;}
 
   /* HERO */
   .hero{
@@ -76,7 +80,8 @@
   .hero-ctas{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:64px;
     opacity:0; animation:rise .7s ease .3s forwards;}
   .btn-primary, .btn-secondary{
-    font-family:'Inter'; font-weight:600; font-size:17px; padding:18px 34px; border-radius:999px;
+    display:inline-flex; align-items:center; justify-content:center; text-decoration:none;
+    font-family:'Montserrat'; font-weight:700; font-size:17px; padding:18px 34px; border-radius:999px;
     cursor:pointer; transition:transform .15s ease, box-shadow .2s ease, background .2s ease; border:none;
   }
   .btn-primary{background:var(--lg-red); color:#fff; box-shadow:0 10px 24px -8px rgba(165,0,52,.5);}
@@ -93,8 +98,8 @@
   .sc-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
   .sc-chip{background:var(--lg-red-tint); color:var(--lg-red); font-size:13px; font-weight:600; padding:6px 14px; border-radius:999px;}
   .sc-cycle{color:var(--lg-red); font-size:20px;}
-  .sc-amount{font-family:'Poppins'; font-weight:700; font-size:36px; margin-bottom:22px;}
-  .sc-amount span{font-family:'Inter'; font-weight:500; font-size:16px; color:var(--lg-sub);}
+  .sc-amount{font-family:'Montserrat'; font-weight:800; font-size:36px; margin-bottom:22px;}
+  .sc-amount span{font-family:'Montserrat'; font-weight:500; font-size:16px; color:var(--lg-sub);}
   .sc-line{height:1px; background:var(--lg-line); margin-bottom:20px;}
   .sc-item{display:flex; justify-content:space-between; gap:16px; margin-bottom:14px; font-size:14.5px;}
   .sc-item span{color:var(--lg-sub);}
@@ -134,7 +139,7 @@
     padding:40px 36px; text-align:center;
   }
   .price-card .tag{font-size:14px; font-weight:600; color:var(--lg-red); margin-bottom:10px;}
-  .price-card .amount{font-size:44px; font-weight:700; font-family:'Poppins'; margin:0 0 4px;}
+  .price-card .amount{font-size:44px; font-weight:800; font-family:'Montserrat'; margin:0 0 4px;}
   .price-card .period{color:var(--lg-sub); font-size:15px; margin-bottom:26px;}
   .price-card .btn-primary{width:100%;}
   .sub-features{list-style:none; padding:0; margin:0 0 32px; display:grid; gap:18px;}
@@ -156,7 +161,7 @@
     font-size:13px; font-weight:600; margin-bottom:18px; letter-spacing:.3px;
   }
   .promo h2{font-size:clamp(26px,3vw,36px); margin:0 0 12px; font-weight:600;}
-  .promo .promo-value{font-size:clamp(30px,3.6vw,44px); font-weight:700; font-family:'Poppins'; margin:0 0 14px;}
+  .promo .promo-value{font-size:clamp(30px,3.6vw,44px); font-weight:800; font-family:'Montserrat'; margin:0 0 14px;}
   .promo p.note{margin:0; opacity:.9; font-size:15px;}
   .promo .btn-primary{background:#fff; color:var(--lg-red); box-shadow:none;}
   .promo .btn-primary:hover{background:#f2f2f2;}
@@ -167,7 +172,7 @@
   .step{text-align:center; padding:0 12px;}
   .step .num{
     width:56px; height:56px; border-radius:50%; border:2px solid var(--lg-red); color:var(--lg-red);
-    display:flex; align-items:center; justify-content:center; font-family:'Poppins'; font-weight:600;
+    display:flex; align-items:center; justify-content:center; font-family:'Montserrat'; font-weight:700;
     font-size:19px; margin:0 auto 20px;
   }
   .step h3{font-size:18px; font-weight:600; margin:0 0 8px;}
@@ -199,7 +204,7 @@
   /* FOOTER */
   footer{background:var(--lg-ink); color:#c9c9cc; padding:56px 0 32px; font-size:14.5px;}
   .foot-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:32px; margin-bottom:36px;}
-  .foot-logo{font-family:'Poppins'; font-weight:700; font-size:20px; color:#fff;}
+  .foot-logo{font-family:'Montserrat'; font-weight:800; font-size:20px; color:#fff;}
   .foot-logo span{color:#ff5c85;}
   .foot-col h4{color:#fff; font-size:14px; font-weight:600; margin:0 0 14px;}
   .foot-col p, .foot-col a{color:#a9a9ad; text-decoration:none; display:block; margin-bottom:8px; font-size:14px;}
@@ -212,31 +217,34 @@
 <nav>
   <div class="container nav-row">
     <div class="nav-logo">LG <span>Subscribe</span></div>
-      <button class="nav-cta" onclick="document.getElementById('subscribe').scrollIntoView()">Explore LG Subscribe</button>
+    <div class="nav-actions">
+      <button class="nav-cta" onclick="document.getElementById('subscribe').scrollIntoView()" data-i18n="navExplore">Khám phá LG Subscribe</button>
+      <div class="lang-switch" aria-label="Language"><button class="lang-btn" type="button" data-lang-option="vi">VI</button><button class="lang-btn" type="button" data-lang-option="en">EN</button></div>
+    </div>
   </div>
 </nav>
 
 <!-- 1. HERO -->
 <header class="hero">
   <div class="container">
-    <span class="eyebrow-pill">LG Subscribe</span>
-    <h1>Own It Monthly, <span class="accent">Live It Fully</span></h1>
-    <p class="lede">Get the LG products you want today, pay a simple monthly amount, and let LG take care of the rest — no large upfront cost, no long-term worry.</p>
+    <span class="eyebrow-pill" data-i18n="heroEyebrow">LG Subscribe</span>
+    <h1 data-i18n-html="heroTitle">Sở hữu theo tháng, <span class="accent">sống trọn tiện nghi</span></h1>
+    <p class="lede" data-i18n="heroCopy">Chọn sản phẩm LG bạn thích ngay hôm nay, thanh toán theo tháng dễ dàng và để LG đồng hành chăm sóc trong suốt gói.</p>
     <div class="hero-ctas">
-      <button class="btn-primary" onclick="document.getElementById('subscribe').scrollIntoView()">Explore LG Subscribe</button>
-      <button class="btn-secondary" onclick="document.getElementById('footer').scrollIntoView()">Contact Sales</button>
+      <button class="btn-primary" onclick="document.getElementById('subscribe').scrollIntoView()" data-i18n="navExplore">Khám phá LG Subscribe</button>
+      <a class="btn-secondary" href="tel:18001503" data-i18n="contactSales">Liên hệ tư vấn</a>
     </div>
     <div class="device-wrap">
       <div class="subscribe-card">
         <div class="sc-row">
-          <span class="sc-chip">Monthly plan</span>
+          <span class="sc-chip" data-i18n="monthlyPlan">Gói theo tháng</span>
           <span class="sc-cycle">↻</span>
         </div>
-        <div class="sc-amount">From ₫90.000<span>/month</span></div>
+        <div class="sc-amount"><span data-i18n="fromPrice">Từ ₫90.000</span><span data-i18n="perMonth">/tháng</span></div>
         <div class="sc-line"></div>
-        <div class="sc-item"><span>Product</span><strong>Your choice of LG product</strong></div>
-        <div class="sc-item"><span>Period</span><strong>12 / 24 / 36 months</strong></div>
-        <div class="sc-item"><span>Includes</span><strong>Product care and support</strong></div>
+        <div class="sc-item"><span data-i18n="product">Sản phẩm</span><strong data-i18n="productChoice">Sản phẩm LG bạn chọn</strong></div>
+        <div class="sc-item"><span data-i18n="period">Kỳ hạn</span><strong data-i18n="periodOptions">12 / 24 / 36 tháng</strong></div>
+        <div class="sc-item"><span data-i18n="includes">Bao gồm</span><strong data-i18n="careSupport">Chăm sóc và hỗ trợ sản phẩm</strong></div>
       </div>
     </div>
   </div>
@@ -246,34 +254,34 @@
 <section>
   <div class="container">
     <div class="section-head">
-      <h2>Why customers choose LG Subscribe</h2>
-      <p>A simpler way to own the LG products you love.</p>
+      <h2 data-i18n="whyTitle">Vì sao khách hàng chọn LG Subscribe</h2>
+      <p data-i18n="whyCopy">Cách sở hữu sản phẩm LG yêu thích đơn giản hơn.</p>
     </div>
     <div class="grid-highlights">
       <div class="hi-card">
         <div class="hi-icon">💳</div>
-        <h3>No upfront cost</h3>
-        <p>Start using your LG product today with a low, predictable monthly payment.</p>
+        <h3 data-i18n="noUpfrontTitle">Không cần trả trước</h3>
+        <p data-i18n="noUpfrontCopy">Bắt đầu sử dụng sản phẩm LG với khoản thanh toán hằng tháng dễ dự tính.</p>
       </div>
       <div class="hi-card">
         <div class="hi-icon">🗓️</div>
-        <h3>Flexible periods</h3>
-        <p>Choose the subscription length that fits your budget and lifestyle.</p>
+        <h3 data-i18n="flexibleTitle">Kỳ hạn linh hoạt</h3>
+        <p data-i18n="flexibleCopy">Chọn thời hạn thuê phù hợp với ngân sách và nhu cầu của bạn.</p>
       </div>
       <div class="hi-card">
         <div class="hi-icon">🛠️</div>
-        <h3>Care included</h3>
-        <p>Product care and support keep your LG product running smoothly during the plan.</p>
+        <h3 data-i18n="careTitle">Đã gồm chăm sóc</h3>
+        <p data-i18n="careCopy">Dịch vụ chăm sóc và hỗ trợ giúp sản phẩm LG vận hành ổn định trong suốt gói.</p>
       </div>
       <div class="hi-card">
         <div class="hi-icon">🛡️</div>
-        <h3>Backed by warranty</h3>
-        <p>Eligible products are backed by LG service coverage for peace of mind.</p>
+        <h3 data-i18n="warrantyTitle">Được bảo hành</h3>
+        <p data-i18n="warrantyCopy">Các sản phẩm đủ điều kiện được hỗ trợ bởi chính sách dịch vụ của LG.</p>
       </div>
       <div class="hi-card">
         <div class="hi-icon">🔁</div>
-        <h3>Works across products</h3>
-        <p>Apply LG Subscribe to a wide range of eligible LG products, in-store or here at the kiosk.</p>
+        <h3 data-i18n="acrossTitle">Áp dụng nhiều ngành hàng</h3>
+        <p data-i18n="acrossCopy">LG Subscribe áp dụng cho nhiều sản phẩm LG đủ điều kiện, tại cửa hàng hoặc ngay kiosk này.</p>
       </div>
     </div>
   </div>
@@ -283,25 +291,25 @@
 <section class="subscribe" id="subscribe">
   <div class="container">
     <div class="section-head">
-      <h2>How LG Subscribe works</h2>
-      <p>One monthly plan covers your product and the care that comes with it — available on eligible LG products, including the display you're viewing this on.</p>
+      <h2 data-i18n="howWorksTitle">LG Subscribe hoạt động như thế nào</h2>
+      <p data-i18n="howWorksCopy">Một gói thanh toán hằng tháng bao gồm sản phẩm và dịch vụ chăm sóc đi kèm, áp dụng cho các sản phẩm LG đủ điều kiện.</p>
     </div>
     <div class="sub-layout">
       <ul class="sub-features">
-        <li><span class="check">✓</span> Simple monthly payment — no large upfront cost</li>
-        <li><span class="check">✓</span> Choose a subscription period that fits you: 12 / 24 / 36 months</li>
-        <li><span class="check">✓</span> Includes product care and support for peace of mind</li>
-        <li><span class="check">✓</span> Backed by eligible LG service coverage</li>
-        <li><span class="check">✓</span> Compare OutRight and Rental prices by category</li>
-        <li><span class="check">✓</span> Guided registration with our on-site LG team</li>
+        <li><span class="check">✓</span> <span data-i18n="featurePayment">Thanh toán hằng tháng đơn giản, không cần chi phí lớn ban đầu</span></li>
+        <li><span class="check">✓</span> <span data-i18n="featurePeriod">Chọn kỳ hạn phù hợp: 12 / 24 / 36 tháng</span></li>
+        <li><span class="check">✓</span> <span data-i18n="featureCare">Đã bao gồm chăm sóc và hỗ trợ sản phẩm</span></li>
+        <li><span class="check">✓</span> <span data-i18n="featureWarranty">Được hỗ trợ bởi chính sách dịch vụ LG cho sản phẩm đủ điều kiện</span></li>
+        <li><span class="check">✓</span> <span data-i18n="featureCompare">So sánh giá mua thẳng và giá thuê theo từng ngành hàng</span></li>
+        <li><span class="check">✓</span> <span data-i18n="featureGuide">Đội ngũ LG tại điểm bán hỗ trợ đăng ký</span></li>
       </ul>
     </div>
     <div style="max-width:360px;margin:40px auto 0;">
       <div class="price-card">
-        <div class="tag">LG Subscribe plan</div>
-        <div class="amount">From ₫90.000</div>
-        <div class="period">per month · plans from 12–36 months</div>
-        <button class="btn-primary" onclick="document.getElementById('promo').scrollIntoView()">See current offer</button>
+        <div class="tag" data-i18n="planTag">Gói LG Subscribe</div>
+        <div class="amount" data-i18n="fromPrice">Từ ₫90.000</div>
+        <div class="period" data-i18n="planPeriod">mỗi tháng · kỳ hạn 12-36 tháng</div>
+        <button class="btn-primary" onclick="document.getElementById('promo').scrollIntoView()" data-i18n="seeOffer">Xem ưu đãi hiện tại</button>
       </div>
     </div>
   </div>
@@ -312,12 +320,12 @@
   <div class="container">
     <div class="promo">
       <div class="promo-left">
-        <span class="badge">Special Offer</span>
-        <h2>A limited-time deal on LG Subscribe</h2>
-        <div class="promo-value">Flexible payment. Simple explanation.</div>
-        <p class="note">Limited-time offer — available while supplies last at this kiosk.</p>
+        <span class="badge" data-i18n="specialOffer">Ưu đãi đặc biệt</span>
+        <h2 data-i18n="promoTitle">Ưu đãi có thời hạn cho LG Subscribe</h2>
+        <div class="promo-value" data-i18n="promoValue">Thanh toán linh hoạt. Tư vấn dễ hiểu.</div>
+        <p class="note" data-i18n="promoNote">Ưu đãi có thời hạn, áp dụng trong thời gian còn hàng tại kiosk này.</p>
       </div>
-      <button class="btn-primary" onclick="document.getElementById('footer').scrollIntoView()">Register Now</button>
+      <a class="btn-primary" href="/total-products" data-i18n="registerNow">Đăng ký ngay</a>
     </div>
   </div>
 </section>
@@ -326,13 +334,13 @@
 <section style="background:var(--lg-mist);">
   <div class="container">
     <div class="section-head">
-      <h2>How to get LG Subscribe</h2>
-      <p>Three simple steps with help from our on-site team.</p>
+      <h2 data-i18n="howGetTitle">Cách đăng ký LG Subscribe</h2>
+      <p data-i18n="howGetCopy">Ba bước đơn giản với sự hỗ trợ của đội ngũ tại điểm bán.</p>
     </div>
     <div class="steps">
-      <div class="step"><div class="num">01</div><h3>Choose your LG product</h3><p>Pick any eligible LG product available at this kiosk.</p></div>
-      <div class="step"><div class="num">02</div><h3>Select LG Subscribe</h3><p>Choose the subscription plan and period that suits your needs.</p></div>
-      <div class="step"><div class="num">03</div><h3>Complete registration</h3><p>Our staff completes your registration and you enjoy your product right away.</p></div>
+      <div class="step"><div class="num">01</div><h3 data-i18n="chooseProductTitle">Chọn sản phẩm LG</h3><p data-i18n="chooseProductCopy">Chọn sản phẩm LG đủ điều kiện có tại kiosk này.</p></div>
+      <div class="step"><div class="num">02</div><h3 data-i18n="selectSubscribeTitle">Chọn LG Subscribe</h3><p data-i18n="selectSubscribeCopy">Chọn gói và kỳ hạn phù hợp với nhu cầu của bạn.</p></div>
+      <div class="step"><div class="num">03</div><h3 data-i18n="completeTitle">Hoàn tất đăng ký</h3><p data-i18n="completeCopy">Nhân viên hỗ trợ hoàn tất đăng ký để bạn sử dụng sản phẩm ngay.</p></div>
     </div>
   </div>
 </section>
@@ -341,25 +349,25 @@
 <section>
   <div class="container">
     <div class="section-head">
-      <h2>Browse products by category</h2>
-      <p>Use these category pages when the customer is ready to compare models, OutRight prices, and 12 / 24 / 36 month rental plans.</p>
+      <h2 data-i18n="browseTitle">Xem sản phẩm theo ngành hàng</h2>
+      <p data-i18n="browseCopy">Dùng các trang ngành hàng để so sánh model, giá mua thẳng và gói thuê 12 / 24 / 36 tháng.</p>
     </div>
     <div class="category-grid">
       <a class="category-card" href="refrigerator/">
-        <div><div class="cat-icon">🧊</div><h3>Refrigerator</h3><p>Bottom freezer, French door, side-by-side and eligible refrigerator models.</p></div>
-        <span class="cat-link">View refrigerator pricing →</span>
+        <div><div class="cat-icon">🧊</div><h3 data-i18n="refrigerator">Tủ lạnh</h3><p data-i18n="refrigeratorCopy">Các model tủ lạnh ngăn đá dưới, French Door, Side-by-Side và sản phẩm đủ điều kiện.</p></div>
+        <span class="cat-link"><span data-i18n="refrigeratorLink">Xem giá tủ lạnh</span> →</span>
       </a>
       <a class="category-card" href="tv/">
-        <div><div class="cat-icon">📺</div><h3>TV</h3><p>Compare eligible OLED, QNED, UHD and large-screen TV models.</p></div>
-        <span class="cat-link">View TV pricing →</span>
+        <div><div class="cat-icon">📺</div><h3 data-i18n="tv">TV</h3><p data-i18n="tvCopy">So sánh các model OLED, QNED, UHD và TV màn hình lớn đủ điều kiện.</p></div>
+        <span class="cat-link"><span data-i18n="tvLink">Xem giá TV</span> →</span>
       </a>
       <a class="category-card" href="appliances/">
-        <div><div class="cat-icon">🧺</div><h3>Appliances</h3><p>Washing, cooking, air care and everyday LG home appliance categories.</p></div>
-        <span class="cat-link">View appliance pricing →</span>
+        <div><div class="cat-icon">🧺</div><h3 data-i18n="appliances">Gia dụng</h3><p data-i18n="appliancesCopy">Máy giặt, thiết bị bếp, chăm sóc không khí và các sản phẩm gia dụng LG.</p></div>
+        <span class="cat-link"><span data-i18n="appliancesLink">Xem giá gia dụng</span> →</span>
       </a>
       <a class="category-card" href="audio-video/">
-        <div><div class="cat-icon">🔊</div><h3>Audio/Video</h3><p>Audio, video and merged accessory-style products in one simple bucket.</p></div>
-        <span class="cat-link">View Audio/Video pricing →</span>
+        <div><div class="cat-icon">🔊</div><h3 data-i18n="audioVideo">Âm thanh/Hình ảnh</h3><p data-i18n="audioVideoCopy">Sản phẩm âm thanh, hình ảnh và phụ kiện được gom trong một nhóm dễ xem.</p></div>
+        <span class="cat-link"><span data-i18n="audioVideoLink">Xem giá Âm thanh/Hình ảnh</span> →</span>
       </a>
     </div>
   </div>
@@ -369,10 +377,10 @@
 <section>
   <div class="container">
     <div class="final-cta">
-      <h2>Ready to start your LG Subscribe plan?</h2>
+      <h2 data-i18n="finalTitle">Sẵn sàng bắt đầu gói LG Subscribe?</h2>
       <div class="hero-ctas">
-        <button class="btn-primary" onclick="document.getElementById('footer').scrollIntoView()">Register Now</button>
-        <button class="btn-secondary" onclick="document.getElementById('footer').scrollIntoView()">Talk to Our Sales Team</button>
+        <a class="btn-primary" href="/total-products" data-i18n="registerNow">Đăng ký ngay</a>
+        <a class="btn-secondary" href="tel:18001503" data-i18n="talkSales">Gọi đội ngũ tư vấn</a>
       </div>
     </div>
   </div>
@@ -387,24 +395,25 @@
       </div>
       <div class="foot-col">
         <h4>LG Subscribe</h4>
-        <a href="#subscribe">Plans &amp; pricing</a>
-        <a href="#promo">Current offer</a>
+        <a href="#subscribe" data-i18n="plansPricing">Gói và giá</a>
+        <a href="#promo" data-i18n="currentOffer">Ưu đãi hiện tại</a>
       </div>
       <div class="foot-col">
-        <h4>Support</h4>
-        <p>Ask a staff member at this kiosk</p>
-        <p>Customer care: [SUPPORT PHONE NUMBER]</p>
-        <p>[SUPPORT EMAIL]</p>
+        <h4 data-i18n="support">Hỗ trợ</h4>
+        <p data-i18n="askStaff">Hỏi nhân viên tại kiosk này</p>
+        <p data-i18n="customerCare">Chăm sóc khách hàng: 18001503</p>
+        <p data-i18n="supportEmail">[EMAIL HỖ TRỢ]</p>
       </div>
       <div class="foot-col">
-        <h4>Legal</h4>
-        <a href="#">Terms &amp; Conditions</a>
-        <a href="#">Privacy Policy</a>
+        <h4 data-i18n="legal">Pháp lý</h4>
+        <a href="#" data-i18n="terms">Điều khoản &amp; Điều kiện</a>
+        <a href="#" data-i18n="privacy">Chính sách quyền riêng tư</a>
       </div>
     </div>
-    <div class="foot-bottom">© 2026 LG Electronics. All rights reserved. · Displayed on LG STANBYME at this kiosk.</div>
+    <div class="foot-bottom" data-i18n="copyright">© 2026 LG Electronics. Bảo lưu mọi quyền. · Hiển thị trên LG STANBYME tại kiosk này.</div>
   </div>
 </footer>
 
+<script src="assets/i18n.js"></script>
 </body>
 </html>

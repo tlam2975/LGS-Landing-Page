@@ -19,6 +19,7 @@ let products = [];
 const moneyFormat = new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND", maximumFractionDigits: 0 });
 const money = value => value ? moneyFormat.format(value) : "n.a.";
 const toNumber = value => Number.isFinite(+value) ? Math.round(+value) : null;
+const text = (key, params) => window.I18N ? window.I18N.t(key, params) : key;
 
 function sheetRows(workbook, name) {
   return XLSX.utils.sheet_to_json(workbook.Sheets[name], { header: 1, raw: true, defval: "" });
@@ -39,6 +40,16 @@ function routeCategory(category) {
   if (category === "TV") return "tv";
   if (category === "Audio/Video") return "audio-video";
   return "appliances";
+}
+
+function displayType(category, level, fallback) {
+  if (category !== "Refrigerator") return level[9] || fallback;
+
+  const family = [level[11], level[13], fallback].join(" ").toLowerCase();
+  if (family.includes("french door") || family.includes("f/d")) return "FD";
+  if ((level[9] || "").toLowerCase() === "bottom freezer" || fallback === "B/F") return "BF";
+
+  return level[9] || fallback;
 }
 
 function parseWorkbook(workbook) {
@@ -62,11 +73,11 @@ function parseWorkbook(workbook) {
       total36: toNumber(row[14]),
       category,
       route: routeCategory(category),
-      type: level[9] || row[2],
+      type: displayType(category, level, row[2]),
       series: level[11] || "",
       variant: level[13] || ""
     };
-  }).filter(product => product.route === PAGE.key);
+  }).filter(product => PAGE.key === "all" || product.route === PAGE.key);
 }
 
 function lgSearch(value) {
@@ -78,23 +89,27 @@ function imageFor(product) {
 }
 
 function setOptions() {
+  const currentSort = els.sort.value || "monthly36";
+  const currentPlan = els.plan.value || "36";
   els.sort.innerHTML = `
-    <option value="monthly36">Lowest monthly</option>
-    <option value="outright">Lowest OutRight</option>
-    <option value="model">Model A-Z</option>
+    <option value="monthly36">${text("lowestMonthly")}</option>
+    <option value="outright">${text("lowestOutright")}</option>
+    <option value="model">${text("modelAZ")}</option>
   `;
   els.plan.innerHTML = `
-    <option value="36">36 months</option>
-    <option value="24">24 months</option>
-    <option value="12">12 months</option>
+    <option value="36">${text("months36")}</option>
+    <option value="24">${text("months24")}</option>
+    <option value="12">${text("months12")}</option>
   `;
+  els.sort.value = currentSort;
+  els.plan.value = currentPlan;
   renderTypes(products);
 }
 
 function renderTypes(list) {
   const current = els.type.value;
   const types = [...new Set(list.map(product => product.type).filter(Boolean))].sort();
-  els.type.innerHTML = `<option value="all">All types</option>` + types.map(type => `<option value="${type}">${type}</option>`).join("");
+  els.type.innerHTML = `<option value="all">${text("allTypes")}</option>` + types.map(type => `<option value="${type}">${type}</option>`).join("");
   els.type.value = types.includes(current) ? current : "all";
 }
 
@@ -102,8 +117,8 @@ function card(product) {
   const planMonths = els.plan.value;
   const source = imageFor(product);
   const image = source
-    ? `<img src="${source}" alt="${product.model}" onerror="this.remove();this.parentElement.insertAdjacentHTML('beforeend','<div class=&quot;placeholder&quot;>Image pending<br>${product.model}</div>')">`
-    : `<div class="placeholder">Image pending<br>${product.model}</div>`;
+    ? `<img src="${source}" alt="${product.model}" onerror="this.remove();this.parentElement.insertAdjacentHTML('beforeend','<div class=&quot;placeholder&quot;>${text("imagePending")}<br>${product.model}</div>')">`
+    : `<div class="placeholder">${text("imagePending")}<br>${product.model}</div>`;
   return `
     <article class="card">
       <div class="media"><span class="badge">${product.category}</span>${image}</div>
@@ -112,16 +127,16 @@ function card(product) {
         <div class="model">${product.model}</div>
         <div class="meta">${product.variant || product.series || product.suffix}<br>${product.suffix}</div>
         <div class="price-row">
-          <div class="price"><span>OutRight</span><strong>${money(product.outright)}</strong></div>
-          <div class="price"><span>${planMonths} month total</span><strong>${money(product[`total${planMonths}`])}</strong></div>
+          <div class="price"><span>${text("outright")}</span><strong>${money(product.outright)}</strong></div>
+          <div class="price"><span>${text("monthTotal", { months: planMonths })}</span><strong>${money(product[`total${planMonths}`])}</strong></div>
         </div>
         <div class="plans">
-          <div class="plan"><span>12 months</span><strong>${money(product.monthly12)}</strong></div>
-          <div class="plan"><span>24 months</span><strong>${money(product.monthly24)}</strong></div>
-          <div class="plan"><span>36 months</span><strong>${money(product.monthly36)}</strong></div>
+          <div class="plan"><span>${text("months12")}</span><strong>${money(product.monthly12)}</strong></div>
+          <div class="plan"><span>${text("months24")}</span><strong>${money(product.monthly24)}</strong></div>
+          <div class="plan"><span>${text("months36")}</span><strong>${money(product.monthly36)}</strong></div>
         </div>
         <div class="links">
-          <a class="primary" href="${lgSearch(product.model)}" target="_blank" rel="noopener">Find image</a>
+          <a class="primary" href="${lgSearch(product.model)}" target="_blank" rel="noopener">${text("findImage")}</a>
           <a href="${lgSearch(product.suffix)}" target="_blank" rel="noopener">LG.com</a>
         </div>
       </div>
@@ -140,12 +155,12 @@ function render() {
   list.sort((a, b) => key === "model" ? a.model.localeCompare(b.model) : (a[key] || Infinity) - (b[key] || Infinity));
   els.grid.innerHTML = list.map(card).join("");
   els.empty.hidden = list.length > 0;
-  els.status.textContent = `${list.length} of ${products.length} products shown`;
+  els.status.textContent = text("productsShown", { shown: list.length, total: products.length });
 }
 
 async function loadWorkbook() {
-  els.title.textContent = PAGE.title;
-  els.copy.textContent = PAGE.copy;
+  els.title.textContent = text(PAGE.titleKey) || PAGE.title;
+  els.copy.textContent = text(PAGE.copyKey) || PAGE.copy;
   setOptions();
   try {
     const response = await fetch(WORKBOOK_FILE);
@@ -155,8 +170,8 @@ async function loadWorkbook() {
     setOptions();
     render();
   } catch (error) {
-    els.status.textContent = "Workbook could not be loaded.";
-    els.grid.innerHTML = `<div class="empty">Check that the workbook is available beside the homepage and preview the site from a local server.</div>`;
+    els.status.textContent = text("workbookError");
+    els.grid.innerHTML = `<div class="empty">${text("workbookHelp")}</div>`;
   }
 }
 
@@ -170,3 +185,12 @@ els.reset.addEventListener("click", () => {
 });
 
 loadWorkbook();
+
+document.addEventListener("languagechange", () => {
+  if (els.search.dataset.i18nPlaceholder) els.search.placeholder = text(els.search.dataset.i18nPlaceholder);
+  if (els.reset.dataset.i18n) els.reset.textContent = text(els.reset.dataset.i18n);
+  els.title.textContent = text(PAGE.titleKey) || PAGE.title;
+  els.copy.textContent = text(PAGE.copyKey) || PAGE.copy;
+  setOptions();
+  render();
+});

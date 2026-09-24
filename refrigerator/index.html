@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -13,12 +13,13 @@
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
-<nav class="nav"><div class="container nav-row"><a class="brand" href="../">LG <span>Subscribe</span></a><div class="nav-links"><a href="../">Home</a><a class="primary" href="../#footer">Contact sales</a></div></div></nav>
-<header class="hero"><div class="container"><a class="crumb" href="../">← Back to LG Subscribe</a><h1 id="page-title">Refrigerator</h1><p class="lede" id="page-copy"></p></div></header>
-<div class="toolbar"><div class="container filters"><input id="search" class="field" placeholder="Search model, suffix, type"><select id="type" class="field"></select><select id="sort" class="field"></select><select id="plan" class="field"></select><button id="reset" class="button">Reset</button></div></div>
-<section><div class="container"><div class="section-head"><div><h2>Models and pricing</h2><p>Compare OutRight price with 12 / 24 / 36 month rental plans.</p></div><div id="status" class="status">Loading workbook...</div></div><div id="grid" class="grid"></div><div id="empty" class="empty" hidden>No products match these filters.</div></div></section>
-<footer class="footer"><div class="container">LG Subscribe · Refrigerator category</div></footer>
-<script>window.CATEGORY_PAGE={key:"refrigerator",title:"Refrigerator",copy:"Eligible refrigerator models with OutRight pricing and monthly rental plans."};</script>
+<nav class="nav"><div class="container nav-row"><a class="brand" href="../">LG <span>Subscribe</span></a><div class="nav-actions"><div class="nav-links"><a href="../" data-i18n="home">Trang chủ</a><a class="primary" href="tel:18001503" data-i18n="contactSales">Liên hệ tư vấn</a></div><div class="lang-switch" aria-label="Language"><button class="lang-btn" type="button" data-lang-option="vi">VI</button><button class="lang-btn" type="button" data-lang-option="en">EN</button></div></div></div></nav>
+<header class="hero"><div class="container"><a class="crumb" href="../">← <span data-i18n="backHome">Quay lại LG Subscribe</span></a><h1 id="page-title">Tủ lạnh</h1><p class="lede" id="page-copy"></p></div></header>
+<div class="toolbar"><div class="container filters"><input id="search" class="field" placeholder="Tìm model, suffix, loại" data-i18n-placeholder="searchPlaceholder"><select id="type" class="field"></select><select id="sort" class="field"></select><select id="plan" class="field"></select><button id="reset" class="button" data-i18n="reset">Đặt lại</button></div></div>
+<section><div class="container"><div class="section-head"><div><h2 data-i18n="modelsPricing">Model và bảng giá</h2><p data-i18n="modelsPricingCopy">So sánh giá mua thẳng với gói thuê 12 / 24 / 36 tháng.</p></div><div id="status" class="status" data-i18n="loadingWorkbook">Đang tải bảng sản phẩm...</div></div><div id="grid" class="grid"></div><div id="empty" class="empty" data-i18n="noMatches" hidden>Không có sản phẩm phù hợp với bộ lọc.</div></div></section>
+<footer class="footer"><div class="container">LG Subscribe · <span data-i18n="refrigerator">Tủ lạnh</span></div></footer>
+<script src="../assets/i18n.js"></script>
+<script>window.CATEGORY_PAGE={key:"refrigerator",titleKey:"refrigerator",title:"Refrigerator",copyKey:"refrigeratorPageCopy",copy:"Eligible refrigerator models with OutRight pricing and monthly rental plans."};</script>
 <script src="../assets/catalog.js"></script>
 </body>
 </html>
