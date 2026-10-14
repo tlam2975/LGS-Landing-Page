@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ưu đãi nhân viên MB — LG Subscribe</title>
+<link rel="icon" href="../logo.png" type="image/png">
+<link rel="apple-touch-icon" href="../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/catalog.css">
+<style>
+  .status-pill{display:inline-flex;align-items:center;gap:8px;margin-top:22px;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:800;background:var(--lg-red-tint);color:var(--lg-red)}
+  .status-pill.ended{background:#efeff1;color:#55555b}
+  .status-pill::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+  .callout{margin-top:22px;max-width:760px;border-left:4px solid var(--lg-red);background:#fff;border-radius:0 12px 12px 0;padding:14px 18px;font-weight:600;line-height:1.55;box-shadow:0 8px 24px rgba(0,0,0,.05)}
+  .tiers{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .panel{border:1px solid var(--lg-line);border-radius:var(--radius);background:#fff;padding:26px;box-shadow:0 14px 34px rgba(0,0,0,.06)}
+  .panel h3{margin:0 0 6px;font-size:22px}
+  .panel .sub{margin:0 0 18px;color:var(--lg-sub);font-size:14px;line-height:1.55}
+  .tier{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:center;border:1px solid var(--lg-line);border-radius:14px;padding:14px 16px;margin-top:10px}
+  .tier .min{font-size:12px;font-weight:800;color:var(--lg-sub);text-transform:uppercase;letter-spacing:.05em;grid-column:1/-1}
+  .tier .amount{font-size:22px;font-weight:800}
+  .tier .gift{font-weight:700;color:var(--lg-red);line-height:1.35}
+  .tier img{width:56px;height:56px;object-fit:contain;grid-row:2/4;grid-column:1;border-radius:10px;background:#f4f4f6}
+  .tier.with-img{grid-template-columns:56px 1fr}
+  .tier.with-img .amount{grid-column:2}
+  .tier.with-img .gift{grid-column:2}
+  .notes{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:6px;color:var(--lg-sub);font-size:14px;line-height:1.55}
+  .notes li::before{content:"•";color:var(--lg-red);font-weight:800;margin-right:8px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .chip{border:1px solid var(--lg-line);border-radius:999px;background:#fff;padding:9px 15px;font-weight:700;font-size:13px;cursor:pointer}
+  .chip.active{background:var(--lg-red);border-color:var(--lg-red);color:#fff}
+  .chip small{opacity:.7;font-weight:600;margin-left:4px}
+  .filters{grid-template-columns:minmax(220px,1.4fr) minmax(150px,.8fr) minmax(150px,.8fr) auto}
+  .staff{display:flex;align-items:center;gap:8px;border-radius:12px;background:var(--lg-red);color:#fff;padding:9px 12px;font-size:12px;font-weight:700}
+  .staff strong{font-size:14px}
+  .staff.none{background:var(--lg-mist);color:var(--lg-sub)}
+  .total{margin:0;color:var(--lg-sub);font-size:12px;font-weight:600}
+  .card{min-height:0}
+  .name{font-size:14px;font-weight:700;line-height:1.4;margin:0}
+  @media(max-width:980px){.tiers{grid-template-columns:1fr}.filters{grid-template-columns:1fr 1fr}}
+  @media(max-width:640px){.filters{grid-template-columns:1fr}.panel{padding:20px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="container nav-row"><a class="brand" href="../">LG <span>Subscribe</span></a><div class="nav-actions"><div class="nav-links"><a href="../">Trang chủ</a><a href="../total-products/">Tất cả sản phẩm</a><a class="primary" href="tel:18001503">Liên hệ tư vấn</a></div></div></div></nav>
+
+<header class="hero"><div class="container">
+  <a class="crumb" href="../">← Quay lại LG Subscribe</a>
+  <h1 id="title">Ưu đãi dành cho nhân viên MB</h1>
+  <p class="lede" id="staff-intro"></p>
+  <div id="validity" class="status-pill"></div>
+  <div id="staff-note" class="callout"></div>
+</div></header>
+
+<section><div class="container">
+  <div class="section-head"><div><h2>Quà tặng theo giá trị đơn hàng</h2><p id="customer-intro"></p></div></div>
+  <div class="tiers">
+    <div class="panel"><h3>Voucher Urbox</h3><p class="sub">Khách hàng cá nhân mua hàng trên LG MiniApp.</p><div id="customer-tiers"></div></div>
+    <div class="panel"><h3>Ưu đãi thêm tại Kiosk</h3><p class="sub" id="kiosk-intro"></p><div id="kiosk-tiers"></div></div>
+  </div>
+  <ul class="notes" id="notes"></ul>
+</div></section>
+
+<div class="toolbar"><div class="container">
+  <div class="filters">
+    <input id="search" class="field" placeholder="Tìm tên sản phẩm hoặc model">
+    <select id="plan" class="field">
+      <option value="monthly">Trả góp theo tháng</option>
+      <option value="yearly">Tổng chi phí theo năm</option>
+    </select>
+    <select id="sort" class="field">
+      <option value="default">Thứ tự trong bảng giá</option>
+      <option value="price-asc">Giá thấp → cao</option>
+      <option value="price-desc">Giá cao → thấp</option>
+      <option value="staff-desc">Voucher nhân viên cao nhất</option>
+    </select>
+    <button id="reset" class="button" type="button">Đặt lại</button>
+  </div>
+  <div class="chips" id="chips"></div>
+</div></div>
+
+<section style="padding-top:36px"><div class="container">
+  <div class="section-head"><div><h2>Bảng giá sản phẩm trên MiniApp</h2><p>Voucher Urbox riêng cho nhân viên MB hiển thị trên từng sản phẩm, chỉ áp dụng khi đặt hàng bằng email nhân viên MB.</p></div><div id="status" class="status">Đang tải...</div></div>
+  <div id="grid" class="grid"></div>
+  <div id="empty" class="empty" hidden>Không có sản phẩm phù hợp với bộ lọc.</div>
+</div></section>
+
+<footer class="footer"><div class="container">LG Subscribe · Ưu đãi nhân viên MB · <span id="source"></span></div></footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const vnd = n => n == null ? "—" : new Intl.NumberFormat("vi-VN").format(n) + "₫";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const state = { data: null, cat: "all" };
+
+function renderIntro(d){
+  $("staff-intro").textContent = d.staffIntro;
+  $("staff-note").textContent = d.staffNote;
+  $("customer-intro").textContent = d.customerIntro;
+  $("kiosk-intro").textContent = d.kioskIntro;
+  $("source").textContent = "Cập nhật " + d.generated.split("-").reverse().join("/");
+  $("notes").innerHTML = d.notes.filter(Boolean).map(n => `<li>${esc(n.replace(/^-\s*/, ""))}</li>`).join("");
+
+  const ended = d.validUntil && new Date(d.validUntil + "T23:59:59+07:00") < new Date();
+  const pill = $("validity");
+  pill.textContent = ended ? `Chương trình đã kết thúc ngày ${d.validUntil.split("-").reverse().join("/")}` : d.validityText;
+  pill.classList.toggle("ended", !!ended);
+
+  $("customer-tiers").innerHTML = d.customerTiers.map(t => `
+    <div class="tier"><span class="min">Đơn hàng từ</span><span class="amount">${vnd(t.minOrder)}</span><span class="gift">${esc(t.gift)}</span></div>`).join("");
+  $("kiosk-tiers").innerHTML = d.kioskTiers.map(t => `
+    <div class="tier ${t.image ? "with-img" : ""}"><span class="min">Đơn hàng từ</span>${t.image ? `<img src="${esc(t.image)}" alt="${esc(t.giftModel)}" onerror="this.remove()">` : ""}<span class="amount">${vnd(t.minOrder)}</span><span class="gift">Tặng ${esc(t.giftName.toLowerCase())} ${esc(t.giftModel)} · giá ${esc(t.giftPrice)}</span></div>`).join("");
+}
+
+function renderChips(){
+  const counts = {};
+  state.data.products.forEach(p => counts[p.cat] = (counts[p.cat] || 0) + 1);
+  const total = state.data.products.length;
+  const items = [["all","Tất cả",total], ...Object.entries(counts).map(([k,v]) => [k,k,v])];
+  $("chips").innerHTML = items.map(([k,label,n]) => `<button type="button" class="chip ${state.cat===k?"active":""}" data-cat="${esc(k)}">${esc(label)}<small>${n}</small></button>`).join("");
+}
+
+function card(p, plan){
+  const img = p.image
+    ? `<img src="${esc(p.image)}" alt="${esc(p.model)}" loading="lazy" onerror="this.remove()">`
+    : `<div class="placeholder">${esc(p.model.split(".")[0])}</div>`;
+  const cells = plan === "monthly"
+    ? Object.entries(p.monthly).map(([k,v]) => `<div class="plan"><span>${k} tháng</span><strong>${vnd(v)}</strong></div>`).join("")
+    : Object.entries(p.yearly).map(([k,v]) => `<div class="plan"><span>${k} năm</span><strong>${vnd(v)}</strong></div>`).join("");
+  const foot = plan === "monthly" ? "Thanh toán mỗi tháng" : "Tổng thanh toán sau mỗi kỳ hạn";
+  const staff = p.staffVoucher
+    ? `<div class="staff">Nhân viên MB nhận thêm voucher Urbox <strong>${vnd(p.staffVoucher)}</strong></div>`
+    : `<div class="staff none">Không có voucher riêng cho nhân viên MB</div>`;
+  return `<article class="card">
+    <div class="media"><span class="badge">${esc(p.cat)}</span>${img}</div>
+    <div class="body">
+      <div class="kicker">${esc(p.model.split(".")[0])}</div>
+      <h3 class="name">${esc(p.name)}</h3>
+      ${staff}
+      <div class="price"><span>Mua thẳng</span><strong>${vnd(p.outright)}</strong></div>
+      <div class="plans">${cells}</div>
+      <p class="total">${foot}</p>
+    </div></article>`;
+}
+
+function render(){
+  const q = $("search").value.trim().toLowerCase();
+  const plan = $("plan").value, sort = $("sort").value;
+  let list = state.data.products.filter(p =>
+    (state.cat === "all" || p.cat === state.cat) &&
+    (!q || (p.name + " " + p.model).toLowerCase().includes(q)));
+  if (sort === "price-asc") list.sort((a,b) => a.outright - b.outright);
+  if (sort === "price-desc") list.sort((a,b) => b.outright - a.outright);
+  if (sort === "staff-desc") list.sort((a,b) => (b.staffVoucher||0) - (a.staffVoucher||0));
+  $("grid").innerHTML = list.map(p => card(p, plan)).join("");
+  $("empty").hidden = list.length > 0;
+  $("status").textContent = `${list.length} / ${state.data.products.length} sản phẩm`;
+  renderChips();
+}
+
+async function init(){
+  try {
+    const res = await fetch("data.json?v=" + Date.now());
+    if (!res.ok) throw new Error(res.status);
+    state.data = await res.json();
+  } catch (e) {
+    $("status").textContent = "Không tải được dữ liệu ưu đãi.";
+    return;
+  }
+  renderIntro(state.data);
+  render();
+  ["search","plan","sort"].forEach(id => $(id).addEventListener("input", render));
+  $("chips").addEventListener("click", e => {
+    const b = e.target.closest("[data-cat]"); if (!b) return;
+    state.cat = b.dataset.cat; render();
+  });
+  $("reset").addEventListener("click", () => {
+    $("search").value = ""; $("plan").value = "monthly"; $("sort").value = "default"; state.cat = "all"; render();
+  });
+}
+init();
+</script>
+</body>
+</html>
