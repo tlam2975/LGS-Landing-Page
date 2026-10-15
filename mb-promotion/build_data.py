@@ -29,7 +29,7 @@ def clean(v):
     return " ".join(str(v).split()) if v else ""
 
 products = []
-for r in ws.iter_rows(min_row=9, max_col=14, values_only=True):
+for r in ws.iter_rows(min_row=9, max_col=17, values_only=True):
     if not r[0] or not r[1]:
         continue
     model = (r[2] or "").strip()
@@ -43,6 +43,7 @@ for r in ws.iter_rows(min_row=9, max_col=14, values_only=True):
         "monthly": {"12": num(r[6]), "24": num(r[7]), "36": num(r[8])},
         "yearly": {"1": num(r[11]), "2": num(r[12]), "3": num(r[13])},
         "image": images.get(base, ""),
+        "warranty": clean(r[16]),  # col Q "Gia hạn bảo hành" (TV only)
     })
 
 validity = clean(ws["P6"].value)

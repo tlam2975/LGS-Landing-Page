@@ -34,9 +34,13 @@
   .chip.active{background:var(--lg-red);border-color:var(--lg-red);color:#fff}
   .chip small{opacity:.7;font-weight:600;margin-left:4px}
   .filters{grid-template-columns:minmax(220px,1.4fr) minmax(150px,.8fr) minmax(150px,.8fr) auto}
-  .staff{display:flex;align-items:center;gap:8px;border-radius:12px;background:var(--lg-red);color:#fff;padding:9px 12px;font-size:12px;font-weight:700}
-  .staff strong{font-size:14px}
-  .staff.none{background:var(--lg-mist);color:var(--lg-sub)}
+  .promos{display:grid;gap:6px;margin:2px 0}
+  .promos-title{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--lg-red)}
+  .promo{display:flex;gap:8px;align-items:flex-start;border-radius:12px;background:var(--lg-red-tint);color:#2a2a2e;padding:8px 11px;font-size:12px;line-height:1.4;font-weight:600}
+  .promo b{font-weight:800}
+  .promo .tag{flex:none;border-radius:6px;background:var(--lg-red);color:#fff;padding:2px 6px;font-size:10px;font-weight:800;letter-spacing:.03em;white-space:nowrap}
+  .promo.muted{background:var(--lg-mist);color:var(--lg-sub)}
+  .promo.muted .tag{background:#b9b9c0}
   .total{margin:0;color:var(--lg-sub);font-size:12px;font-weight:600}
   .card{min-height:0}
   .name{font-size:14px;font-weight:700;line-height:1.4;margin:0}
@@ -102,7 +106,8 @@ function renderIntro(d){
   $("customer-intro").textContent = d.customerIntro;
   $("kiosk-intro").textContent = d.kioskIntro;
   $("source").textContent = "Cập nhật " + d.generated.split("-").reverse().join("/");
-  $("notes").innerHTML = d.notes.filter(Boolean).map(n => `<li>${esc(n.replace(/^-\s*/, ""))}</li>`).join("");
+  $("notes").innerHTML = d.notes.filter(Boolean).map(n => `<li>${esc(n.replace(/^-\s*/, ""))}</li>`).join("")
+    + `<li>Mức quà trên từng sản phẩm được tính theo giá mua thẳng của riêng sản phẩm đó; đơn hàng nhiều sản phẩm có thể đạt mức cao hơn.</li>`;
 
   const ended = d.validUntil && new Date(d.validUntil + "T23:59:59+07:00") < new Date();
   const pill = $("validity");
@@ -123,6 +128,27 @@ function renderChips(){
   $("chips").innerHTML = items.map(([k,label,n]) => `<button type="button" class="chip ${state.cat===k?"active":""}" data-cat="${esc(k)}">${esc(label)}<small>${n}</small></button>`).join("");
 }
 
+// Promotions that apply to one product: staff voucher, TV warranty extension,
+// and the order-value gift tiers (judged on this product's outright price).
+function promoList(p){
+  const d = state.data, out = [];
+  out.push(p.staffVoucher
+    ? {tag: "NV MB", html: `Voucher Urbox <b>${vnd(p.staffVoucher)}</b> khi đặt bằng email nhân viên MB`}
+    : {tag: "NV MB", html: "Không có voucher riêng cho nhân viên MB", muted: true});
+  if (p.warranty) out.push({tag: "BẢO HÀNH", html: `Gia hạn bảo hành <b>${esc(p.warranty)}</b>`});
+  const best = (tiers) => tiers.filter(t => p.outright >= t.minOrder).sort((a,b) => b.minOrder - a.minOrder)[0];
+  const first = tiers => tiers.slice().sort((a,b) => a.minOrder - b.minOrder)[0];
+  const c = best(d.customerTiers);
+  out.push(c
+    ? {tag: "KHÁCH HÀNG", html: `Đơn từ ${vnd(c.minOrder)}: <b>${esc(c.gift)}</b>`}
+    : {tag: "KHÁCH HÀNG", html: `Đơn từ ${vnd(first(d.customerTiers).minOrder)} nhận ${esc(first(d.customerTiers).gift.toLowerCase())}`, muted: true});
+  const k = best(d.kioskTiers);
+  out.push(k
+    ? {tag: "KIOSK", html: `Đơn từ ${vnd(k.minOrder)}: tặng <b>${esc(k.giftName.toLowerCase())} ${esc(k.giftModel)}</b>`}
+    : {tag: "KIOSK", html: `Đơn từ ${vnd(first(d.kioskTiers).minOrder)} tặng ${esc(first(d.kioskTiers).giftName.toLowerCase())} (tư vấn tại Kiosk)`, muted: true});
+  return out;
+}
+
 function card(p, plan){
   const img = p.image
     ? `<img src="${esc(p.image)}" alt="${esc(p.model)}" loading="lazy" onerror="this.remove()">`
@@ -131,15 +157,13 @@ function card(p, plan){
     ? Object.entries(p.monthly).map(([k,v]) => `<div class="plan"><span>${k} tháng</span><strong>${vnd(v)}</strong></div>`).join("")
     : Object.entries(p.yearly).map(([k,v]) => `<div class="plan"><span>${k} năm</span><strong>${vnd(v)}</strong></div>`).join("");
   const foot = plan === "monthly" ? "Thanh toán mỗi tháng" : "Tổng thanh toán sau mỗi kỳ hạn";
-  const staff = p.staffVoucher
-    ? `<div class="staff">Nhân viên MB nhận thêm voucher Urbox <strong>${vnd(p.staffVoucher)}</strong></div>`
-    : `<div class="staff none">Không có voucher riêng cho nhân viên MB</div>`;
+  const promos = promoList(p).map(x => `<div class="promo ${x.muted ? "muted" : ""}"><span class="tag">${esc(x.tag)}</span><span>${x.html}</span></div>`).join("");
   return `<article class="card">
     <div class="media"><span class="badge">${esc(p.cat)}</span>${img}</div>
     <div class="body">
       <div class="kicker">${esc(p.model.split(".")[0])}</div>
       <h3 class="name">${esc(p.name)}</h3>
-      ${staff}
+      <div class="promos"><div class="promos-title">Khuyến mại</div>${promos}</div>
       <div class="price"><span>Mua thẳng</span><strong>${vnd(p.outright)}</strong></div>
       <div class="plans">${cells}</div>
       <p class="total">${foot}</p>
