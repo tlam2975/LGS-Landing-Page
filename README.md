@@ -1,1 +1,0 @@
-# LGS-Landing-Page
