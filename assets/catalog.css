@@ -42,14 +42,17 @@ section{padding:58px 0}
 .status{color:var(--lg-sub);font-size:13px;font-weight:700;text-align:right}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .card{display:flex;min-height:520px;flex-direction:column;border:1px solid var(--lg-line);border-radius:var(--radius);background:#fff;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.06)}
-.media{position:relative;height:205px;display:grid;place-items:center;background:linear-gradient(145deg,#fff,#f0eef1);border-bottom:1px solid var(--lg-line)}
-.media img{width:100%;height:100%;object-fit:contain;padding:20px}
+.media{position:relative;flex:0 0 205px;height:205px;min-width:0;overflow:hidden;display:grid;place-items:center;background:linear-gradient(145deg,#fff,#f0eef1);border-bottom:1px solid var(--lg-line)}
+.media img{display:block;width:100%;height:100%;min-width:0;min-height:0;max-width:100%;max-height:100%;object-fit:contain;padding:20px}
 .placeholder{width:72%;min-height:120px;display:grid;place-items:center;border:2px solid #d8d8de;border-radius:16px;color:#777;text-align:center;font-weight:800;line-height:1.35;padding:18px}
 .badge{position:absolute;top:12px;left:12px;border:1px solid var(--lg-line);border-radius:999px;background:rgba(255,255,255,.9);padding:7px 10px;font-size:11px;font-weight:800}
 .body{display:flex;flex:1;flex-direction:column;gap:13px;padding:18px}
 .kicker{color:var(--lg-red);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
 .model{font-size:23px;font-weight:800;line-height:1.1;overflow-wrap:anywhere}
 .meta{min-height:40px;color:var(--lg-sub);font-size:13px;line-height:1.45;overflow-wrap:anywhere}
+.promotion-details{border:1px solid rgba(165,0,52,.22);border-radius:14px;background:#fff8fa;padding:11px 12px;color:var(--lg-ink);font-size:12px;line-height:1.45}
+.promotion-details strong{display:block;margin-bottom:5px;color:var(--lg-red);font-size:12px}
+.promotion-details ul{display:grid;gap:3px;margin:0;padding-left:16px}
 .price-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .price{border:1px solid var(--lg-line);border-radius:14px;padding:12px}
 .price span,.plan span{display:block;margin-bottom:5px;color:var(--lg-sub);font-size:11px;font-weight:800}
